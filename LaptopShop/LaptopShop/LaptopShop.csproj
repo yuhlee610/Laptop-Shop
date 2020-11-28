@@ -166,6 +166,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DBLaptop.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\F_getCustomerByID_Result.cs">
+      <DependentUpon>DBLaptop.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Order.cs">
       <DependentUpon>DBLaptop.tt</DependentUpon>
     </Compile>
@@ -225,6 +228,7 @@
     <Content Include="Models\DBLaptop.edmx.diagram">
       <DependentUpon>DBLaptop.edmx</DependentUpon>
     </Content>
+    <Content Include="Areas\Admin\Views\ManageCustomers\Edit.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

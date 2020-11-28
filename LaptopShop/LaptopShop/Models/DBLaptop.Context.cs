@@ -190,5 +190,72 @@ namespace LaptopShop.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
         }
+    
+        [DbFunction("DBLaptopEntities", "F_getCustomerByID")]
+        public virtual IQueryable<F_getCustomerByID_Result> F_getCustomerByID(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<F_getCustomerByID_Result>("[DBLaptopEntities].[F_getCustomerByID](@id)", idParameter);
+        }
+    
+        public virtual int Update_Customers(Nullable<int> id, string accountName, string passWord, string firstName, string lastName, Nullable<bool> sex, string address, string phoneNumber, string email, string dateRegistation, Nullable<System.DateTime> dateActivated, Nullable<bool> decentralization, Nullable<bool> active)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            var accountNameParameter = accountName != null ?
+                new ObjectParameter("accountName", accountName) :
+                new ObjectParameter("accountName", typeof(string));
+    
+            var passWordParameter = passWord != null ?
+                new ObjectParameter("passWord", passWord) :
+                new ObjectParameter("passWord", typeof(string));
+    
+            var firstNameParameter = firstName != null ?
+                new ObjectParameter("FirstName", firstName) :
+                new ObjectParameter("FirstName", typeof(string));
+    
+            var lastNameParameter = lastName != null ?
+                new ObjectParameter("LastName", lastName) :
+                new ObjectParameter("LastName", typeof(string));
+    
+            var sexParameter = sex.HasValue ?
+                new ObjectParameter("Sex", sex) :
+                new ObjectParameter("Sex", typeof(bool));
+    
+            var addressParameter = address != null ?
+                new ObjectParameter("Address", address) :
+                new ObjectParameter("Address", typeof(string));
+    
+            var phoneNumberParameter = phoneNumber != null ?
+                new ObjectParameter("phoneNumber", phoneNumber) :
+                new ObjectParameter("phoneNumber", typeof(string));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("Email", email) :
+                new ObjectParameter("Email", typeof(string));
+    
+            var dateRegistationParameter = dateRegistation != null ?
+                new ObjectParameter("dateRegistation", dateRegistation) :
+                new ObjectParameter("dateRegistation", typeof(string));
+    
+            var dateActivatedParameter = dateActivated.HasValue ?
+                new ObjectParameter("dateActivated", dateActivated) :
+                new ObjectParameter("dateActivated", typeof(System.DateTime));
+    
+            var decentralizationParameter = decentralization.HasValue ?
+                new ObjectParameter("Decentralization", decentralization) :
+                new ObjectParameter("Decentralization", typeof(bool));
+    
+            var activeParameter = active.HasValue ?
+                new ObjectParameter("Active", active) :
+                new ObjectParameter("Active", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Update_Customers", idParameter, accountNameParameter, passWordParameter, firstNameParameter, lastNameParameter, sexParameter, addressParameter, phoneNumberParameter, emailParameter, dateRegistationParameter, dateActivatedParameter, decentralizationParameter, activeParameter);
+        }
     }
 }

@@ -38,5 +38,18 @@ namespace LaptopShop.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
         }
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            Customer cus = new Customer();
+            cus = CustomerController.ViewDetail(id);
+            return View(cus);
+        }
+        [HttpPost]
+        public ActionResult Edit(Customer cus)
+        {
+            CustomerController.EditCustomer(cus);
+            return RedirectToAction("Index");
+        }
     }
 }

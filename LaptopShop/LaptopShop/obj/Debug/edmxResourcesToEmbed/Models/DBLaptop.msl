@@ -117,5 +117,25 @@
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="DBLaptopModel.Store.sp_renamediagram" />
     <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="DBLaptopModel.Store.sp_upgraddiagrams" />
+    <FunctionImportMapping FunctionImportName="F_getCustomerByID" FunctionName="DBLaptopModel.Store.F_getCustomerByID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBLaptopModel.F_getCustomerByID_Result">
+          <ScalarProperty Name="accountName" ColumnName="accountName" />
+          <ScalarProperty Name="passWord" ColumnName="passWord" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Sex" ColumnName="Sex" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="dateRegistation" ColumnName="dateRegistation" />
+          <ScalarProperty Name="dateActivated" ColumnName="dateActivated" />
+          <ScalarProperty Name="Decentralization" ColumnName="Decentralization" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Update_Customers" FunctionName="DBLaptopModel.Store.Update_Customers" />
   </EntityContainerMapping>
 </Mapping>

@@ -164,6 +164,28 @@
           <Parameter Name="Decentralization" Type="bit" Mode="In" />
           <Parameter Name="Active" Type="bit" Mode="In" />
         </Function>
+        <Function Name="F_getCustomerByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="accountName" Type="nvarchar" MaxLength="50" Nullable="false" />
+                <Property Name="passWord" Type="nvarchar" MaxLength="50" Nullable="false" />
+                <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+                <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+                <Property Name="Sex" Type="bit" />
+                <Property Name="Address" Type="nvarchar" MaxLength="250" />
+                <Property Name="phoneNumber" Type="nvarchar" MaxLength="50" />
+                <Property Name="Email" Type="nvarchar" MaxLength="250" Nullable="false" />
+                <Property Name="dateRegistation" Type="nchar" MaxLength="10" />
+                <Property Name="dateActivated" Type="date" />
+                <Property Name="Decentralization" Type="bit" />
+                <Property Name="Active" Type="bit" />
+                <Property Name="id" Type="int" Nullable="false" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
@@ -195,6 +217,21 @@
           <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Update_Customers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="accountName" Type="nvarchar" Mode="In" />
+          <Parameter Name="passWord" Type="nvarchar" Mode="In" />
+          <Parameter Name="FirstName" Type="nvarchar" Mode="In" />
+          <Parameter Name="LastName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Sex" Type="bit" Mode="In" />
+          <Parameter Name="Address" Type="nvarchar" Mode="In" />
+          <Parameter Name="phoneNumber" Type="nvarchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="dateRegistation" Type="nchar" Mode="In" />
+          <Parameter Name="dateActivated" Type="date" Mode="In" />
+          <Parameter Name="Decentralization" Type="bit" Mode="In" />
+          <Parameter Name="Active" Type="bit" Mode="In" />
+        </Function>
         <EntityContainer Name="DBLaptopModelStoreContainer">
           <EntitySet Name="Brands" EntityType="Self.Brands" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
@@ -455,6 +492,24 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="F_getCustomerByID" IsComposable="true" ReturnType="Collection(DBLaptopModel.F_getCustomerByID_Result)">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Update_Customers">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="accountName" Mode="In" Type="String" />
+            <Parameter Name="passWord" Mode="In" Type="String" />
+            <Parameter Name="FirstName" Mode="In" Type="String" />
+            <Parameter Name="LastName" Mode="In" Type="String" />
+            <Parameter Name="Sex" Mode="In" Type="Boolean" />
+            <Parameter Name="Address" Mode="In" Type="String" />
+            <Parameter Name="phoneNumber" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="dateRegistation" Mode="In" Type="String" />
+            <Parameter Name="dateActivated" Mode="In" Type="DateTime" />
+            <Parameter Name="Decentralization" Mode="In" Type="Boolean" />
+            <Parameter Name="Active" Mode="In" Type="Boolean" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -466,6 +521,21 @@
           <Property Type="Int32" Name="ID" Nullable="false" />
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="F_getCustomerByID_Result">
+          <Property Type="String" Name="accountName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="passWord" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="Sex" Nullable="true" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="phoneNumber" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="dateRegistation" Nullable="true" MaxLength="10" />
+          <Property Type="DateTime" Name="dateActivated" Nullable="true" Precision="10" />
+          <Property Type="Boolean" Name="Decentralization" Nullable="true" />
+          <Property Type="Boolean" Name="Active" Nullable="true" />
+          <Property Type="Int32" Name="id" Nullable="false" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -589,6 +659,26 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="DBLaptopModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="DBLaptopModel.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="F_getCustomerByID" FunctionName="DBLaptopModel.Store.F_getCustomerByID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBLaptopModel.F_getCustomerByID_Result">
+                <ScalarProperty Name="accountName" ColumnName="accountName" />
+                <ScalarProperty Name="passWord" ColumnName="passWord" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="dateRegistation" ColumnName="dateRegistation" />
+                <ScalarProperty Name="dateActivated" ColumnName="dateActivated" />
+                <ScalarProperty Name="Decentralization" ColumnName="Decentralization" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Update_Customers" FunctionName="DBLaptopModel.Store.Update_Customers" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

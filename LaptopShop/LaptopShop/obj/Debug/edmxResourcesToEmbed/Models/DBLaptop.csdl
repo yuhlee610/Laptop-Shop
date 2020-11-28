@@ -227,6 +227,24 @@
       <Parameter Name="new_diagramname" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="sp_upgraddiagrams" />
+    <FunctionImport Name="F_getCustomerByID" IsComposable="true" ReturnType="Collection(DBLaptopModel.F_getCustomerByID_Result)">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Update_Customers">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+      <Parameter Name="accountName" Mode="In" Type="String" />
+      <Parameter Name="passWord" Mode="In" Type="String" />
+      <Parameter Name="FirstName" Mode="In" Type="String" />
+      <Parameter Name="LastName" Mode="In" Type="String" />
+      <Parameter Name="Sex" Mode="In" Type="Boolean" />
+      <Parameter Name="Address" Mode="In" Type="String" />
+      <Parameter Name="phoneNumber" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="dateRegistation" Mode="In" Type="String" />
+      <Parameter Name="dateActivated" Mode="In" Type="DateTime" />
+      <Parameter Name="Decentralization" Mode="In" Type="Boolean" />
+      <Parameter Name="Active" Mode="In" Type="Boolean" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="sp_helpdiagramdefinition_Result">
     <Property Type="Int32" Name="version" Nullable="true" />
@@ -238,5 +256,20 @@
     <Property Type="Int32" Name="ID" Nullable="false" />
     <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
     <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="F_getCustomerByID_Result">
+    <Property Type="String" Name="accountName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="passWord" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+    <Property Type="Boolean" Name="Sex" Nullable="true" />
+    <Property Type="String" Name="Address" Nullable="true" MaxLength="250" />
+    <Property Type="String" Name="phoneNumber" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Email" Nullable="false" MaxLength="250" />
+    <Property Type="String" Name="dateRegistation" Nullable="true" MaxLength="10" />
+    <Property Type="DateTime" Name="dateActivated" Nullable="true" Precision="10" />
+    <Property Type="Boolean" Name="Decentralization" Nullable="true" />
+    <Property Type="Boolean" Name="Active" Nullable="true" />
+    <Property Type="Int32" Name="id" Nullable="false" />
   </ComplexType>
 </Schema>

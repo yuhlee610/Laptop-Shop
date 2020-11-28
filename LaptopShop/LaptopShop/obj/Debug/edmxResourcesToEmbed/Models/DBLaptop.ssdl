@@ -159,6 +159,28 @@
     <Parameter Name="Decentralization" Type="bit" Mode="In" />
     <Parameter Name="Active" Type="bit" Mode="In" />
   </Function>
+  <Function Name="F_getCustomerByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+    <ReturnType>
+      <CollectionType>
+        <RowType>
+          <Property Name="accountName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="passWord" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Sex" Type="bit" />
+          <Property Name="Address" Type="nvarchar" MaxLength="250" />
+          <Property Name="phoneNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="dateRegistation" Type="nchar" MaxLength="10" />
+          <Property Name="dateActivated" Type="date" />
+          <Property Name="Decentralization" Type="bit" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="id" Type="int" Nullable="false" />
+        </RowType>
+      </CollectionType>
+    </ReturnType>
+  </Function>
   <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
   <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
@@ -190,6 +212,21 @@
     <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="Update_Customers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+    <Parameter Name="accountName" Type="nvarchar" Mode="In" />
+    <Parameter Name="passWord" Type="nvarchar" Mode="In" />
+    <Parameter Name="FirstName" Type="nvarchar" Mode="In" />
+    <Parameter Name="LastName" Type="nvarchar" Mode="In" />
+    <Parameter Name="Sex" Type="bit" Mode="In" />
+    <Parameter Name="Address" Type="nvarchar" Mode="In" />
+    <Parameter Name="phoneNumber" Type="nvarchar" Mode="In" />
+    <Parameter Name="Email" Type="nvarchar" Mode="In" />
+    <Parameter Name="dateRegistation" Type="nchar" Mode="In" />
+    <Parameter Name="dateActivated" Type="date" Mode="In" />
+    <Parameter Name="Decentralization" Type="bit" Mode="In" />
+    <Parameter Name="Active" Type="bit" Mode="In" />
+  </Function>
   <EntityContainer Name="DBLaptopModelStoreContainer">
     <EntitySet Name="Brands" EntityType="Self.Brands" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
