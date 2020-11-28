@@ -139,42 +139,50 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="ModelController\BaseController.cs" />
     <Compile Include="ModelController\CustomerController.cs" />
+    <Compile Include="ModelController\Encrypt.cs" />
     <Compile Include="Models\Brand.cs">
-      <DependentUpon>DBLaptopShop.tt</DependentUpon>
+      <DependentUpon>DBLaptop.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Category.cs">
-      <DependentUpon>DBLaptopShop.tt</DependentUpon>
+      <DependentUpon>DBLaptop.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Customer.cs">
-      <DependentUpon>DBLaptopShop.tt</DependentUpon>
+      <DependentUpon>DBLaptop.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DBLaptopShop.Context.cs">
+    <Compile Include="Models\DBLaptop.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DBLaptopShop.Context.tt</DependentUpon>
+      <DependentUpon>DBLaptop.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DBLaptopShop.cs">
+    <Compile Include="Models\DBLaptop.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DBLaptopShop.tt</DependentUpon>
+      <DependentUpon>DBLaptop.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DBLaptopShop.Designer.cs">
+    <Compile Include="Models\DBLaptop.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DBLaptopShop.edmx</DependentUpon>
+      <DependentUpon>DBLaptop.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Order.cs">
-      <DependentUpon>DBLaptopShop.tt</DependentUpon>
+      <DependentUpon>DBLaptop.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\OrderDatail.cs">
-      <DependentUpon>DBLaptopShop.tt</DependentUpon>
+      <DependentUpon>DBLaptop.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Product.cs">
-      <DependentUpon>DBLaptopShop.tt</DependentUpon>
+      <DependentUpon>DBLaptop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>DBLaptop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams_Result.cs">
+      <DependentUpon>DBLaptop.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>DBLaptopShop.tt</DependentUpon>
+      <DependentUpon>DBLaptop.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -195,26 +203,27 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="js\scripts.js" />
-    <Content Include="Models\DBLaptopShop.Context.tt">
+    <Content Include="Models\DBLaptop.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DBLaptopShop.edmx</DependentUpon>
-      <LastGenOutput>DBLaptopShop.Context.cs</LastGenOutput>
+      <DependentUpon>DBLaptop.edmx</DependentUpon>
+      <LastGenOutput>DBLaptop.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\DBLaptopShop.tt">
+    <Content Include="Models\DBLaptop.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DBLaptopShop.edmx</DependentUpon>
-      <LastGenOutput>DBLaptopShop.cs</LastGenOutput>
+      <DependentUpon>DBLaptop.edmx</DependentUpon>
+      <LastGenOutput>DBLaptop.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\ManageCustomers\Index.cshtml" />
-    <EntityDeploy Include="Models\DBLaptopShop.edmx">
+    <Content Include="Areas\Admin\Views\ManageCustomers\Create.cshtml" />
+    <EntityDeploy Include="Models\DBLaptop.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DBLaptopShop.Designer.cs</LastGenOutput>
+      <LastGenOutput>DBLaptop.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\DBLaptopShop.edmx.diagram">
-      <DependentUpon>DBLaptopShop.edmx</DependentUpon>
+    <Content Include="Models\DBLaptop.edmx.diagram">
+      <DependentUpon>DBLaptop.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

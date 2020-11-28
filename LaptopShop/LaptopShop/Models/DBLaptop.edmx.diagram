@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="1cdf15924c114271a80b6078fc15c246" Name="Diagram1">
+      <Diagram DiagramId="d2aa047b36a645df9576ce4e498f4bc2" Name="Diagram1">
         <EntityTypeShape EntityType="DBLaptopModel.Brand" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DBLaptopModel.Category" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
         <EntityTypeShape EntityType="DBLaptopModel.Customer" Width="1.5" PointX="0.75" PointY="9" IsExpanded="true" />
