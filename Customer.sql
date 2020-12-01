@@ -31,6 +31,7 @@ RETURNS TABLE
 AS
 	RETURN SELECT * FROM Customers WHERE id=@id
 
+select * from F_getCustomerByID(3)
 
 CREATE PROC [dbo].[Update_Customers]
 @id int,
@@ -53,3 +54,9 @@ BEGIN
 	WHERE id=@id
 END
 GO
+
+create procedure Delete_Customer @id int
+as
+begin
+	DELETE FROM Customers WHERE id=@id
+end

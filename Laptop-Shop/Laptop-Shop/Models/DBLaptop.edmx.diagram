@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8ae53a3cc2834a4b8177131cc6414b18" Name="Diagram1">
+        <EntityTypeShape EntityType="DBLaptopModel.Brand" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBLaptopModel.Category" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBLaptopModel.Customer" Width="1.5" PointX="0.75" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBLaptopModel.OrderDatail" Width="1.5" PointX="5.25" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBLaptopModel.Order" Width="1.5" PointX="3" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBLaptopModel.Product" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBLaptopModel.sysdiagram" Width="1.5" PointX="2.75" PointY="5.75" IsExpanded="true" />
+        <AssociationConnector Association="DBLaptopModel.FK_Products_Brands" ManuallyRouted="false" />
+        <AssociationConnector Association="DBLaptopModel.FK_Products_Categories" ManuallyRouted="false" />
+        <AssociationConnector Association="DBLaptopModel.FK__Orders__customer__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="DBLaptopModel.FK_OrderDatails_Orders" ManuallyRouted="false" />
+        <AssociationConnector Association="DBLaptopModel.FK_OrderDatails_Products" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
