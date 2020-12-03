@@ -76,5 +76,13 @@ namespace Laptop_Shop.ModelController
                 _context.Delete_Customer(id);
             }
         }
+        public static bool ValidEmail(string email)
+        {
+            using(var _context=new DBLaptopEntities())
+            {
+                var res = _context.Database.SqlQuery<bool>("select dbo.vaValidEmail('"+email+"'letranduchuy@gmail.com')").FirstOrDefault();
+                return res;
+            }
+        }
     }
 }

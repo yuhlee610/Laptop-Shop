@@ -1,4 +1,4 @@
-CREATE PROC [dbo].[C_Customers]
+﻿CREATE PROC [dbo].[C_Customers]
 @accountName nvarchar(50),
 @passWord nvarchar(50),
 @FirstName nvarchar(50),
@@ -60,3 +60,17 @@ as
 begin
 	DELETE FROM Customers WHERE id=@id
 end
+
+--Xác thực email
+CREATE FUNCTION vaValidEmail(@EMAIL varchar(100))
+RETURNS bit as
+BEGIN     
+  DECLARE @bitRetVal as Bit
+  IF (@EMAIL <> '' AND @EMAIL NOT LIKE '_%@__%.__%')
+     SET @bitRetVal = 0  -- Invalid
+  ELSE 
+    SET @bitRetVal = 1   -- Valid
+  RETURN @bitRetVal
+END 
+
+select dbo.vaValidEmail('letranduchuy@gmail.com')

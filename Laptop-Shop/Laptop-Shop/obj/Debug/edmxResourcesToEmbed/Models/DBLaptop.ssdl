@@ -230,6 +230,9 @@
     <Parameter Name="Decentralization" Type="bit" Mode="In" />
     <Parameter Name="Active" Type="bit" Mode="In" />
   </Function>
+  <Function Name="vaValidEmail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="bit">
+    <Parameter Name="EMAIL" Type="varchar" Mode="In" />
+  </Function>
   <EntityContainer Name="DBLaptopModelStoreContainer">
     <EntitySet Name="Brands" EntityType="Self.Brands" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />

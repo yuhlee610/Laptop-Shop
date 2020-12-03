@@ -27,6 +27,11 @@ namespace Laptop_Shop.Areas.Admin.Controllers
         {
             string encryptPass = Encrypt.GetMD5(cus.passWord);
             cus.passWord = encryptPass;
+            if(CustomerController.ValidEmail(cus.Email))
+            {
+                SetAlert("Email không hợp lệ", "fail");
+                return View("Create");
+            }
             if (CustomerController.CreateCustomer(cus))
             {
                 SetAlert("Thêm User thành công", "success");
