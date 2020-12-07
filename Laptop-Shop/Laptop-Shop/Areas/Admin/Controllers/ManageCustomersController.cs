@@ -2,6 +2,7 @@
 using Laptop_Shop.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -10,6 +11,7 @@ namespace Laptop_Shop.Areas.Admin.Controllers
 {
     public class ManageCustomersController : BaseController
     {
+        private DBLaptopEntities db = new DBLaptopEntities();
         // GET: Admin/ManageCustomers
         public ActionResult Index(string searchString, int page = 1, int pageSize = 5)
         {
@@ -20,6 +22,7 @@ namespace Laptop_Shop.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Create()
         {
+            ViewBag.idCusAuthe = new SelectList(db.cusAuthes, "id", "nameAuthe");
             return View();
         }
         [HttpPost]
@@ -27,7 +30,8 @@ namespace Laptop_Shop.Areas.Admin.Controllers
         {
             string encryptPass = Encrypt.GetMD5(cus.passWord);
             cus.passWord = encryptPass;
-            if(CustomerController.ValidEmail(cus.Email))
+            ViewBag.idCusAuthe = new SelectList(db.cusAuthes, "id", "nameAuthe");
+            if (CustomerController.ValidEmail(cus.Email)==false)
             {
                 SetAlert("Email không hợp lệ", "fail");
                 return View("Create");
@@ -46,6 +50,7 @@ namespace Laptop_Shop.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
+            ViewBag.idCusAuthe = new SelectList(db.cusAuthes, "id", "nameAuthe");
             Customer cus = new Customer();
             cus = CustomerController.ViewDetail(id);
             return View(cus);
@@ -53,6 +58,7 @@ namespace Laptop_Shop.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Edit(Customer cus)
         {
+            ViewBag.idCusAuthe = new SelectList(db.cusAuthes, "id", "nameAuthe");
             CustomerController.EditCustomer(cus);
             return RedirectToAction("Index");
         }

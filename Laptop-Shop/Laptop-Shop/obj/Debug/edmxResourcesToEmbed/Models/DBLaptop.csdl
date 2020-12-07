@@ -6,10 +6,20 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="brandName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="brandPiture" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
     <Property Name="brandDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="brandHomePage" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Products" Relationship="Self.FK_Products_Brands" FromRole="Brands" ToRole="Products" />
+  </EntityType>
+  <EntityType Name="Cart">
+    <Key>
+      <PropertyRef Name="id_user" />
+      <PropertyRef Name="id_product" />
+    </Key>
+    <Property Name="id_user" Type="Int32" Nullable="false" />
+    <Property Name="id_product" Type="Int32" Nullable="false" />
+    <Property Name="count" Type="Int32" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__Cart__id_product__37A5467C" FromRole="Cart" ToRole="Products" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK__Cart__id_user__38996AB5" FromRole="Cart" ToRole="Customers" />
   </EntityType>
   <EntityType Name="Category">
     <Key>
@@ -18,15 +28,36 @@
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="cateName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="cateDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="catePicture" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Products" Relationship="Self.FK_Products_Categories" FromRole="Categories" ToRole="Products" />
   </EntityType>
-  <EntityType Name="Customer">
+  <EntityType Name="cusAuthe">
     <Key>
       <PropertyRef Name="id" />
     </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nameAuthe" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="cusAuthe_Roles" Relationship="Self.FK_cusAuthe_Roles_cusAuthe" FromRole="cusAuthe" ToRole="cusAuthe_Roles" />
+    <NavigationProperty Name="Customers" Relationship="Self.FK_Customers_cusAuthe" FromRole="cusAuthe" ToRole="Customers" />
+  </EntityType>
+  <EntityType Name="cusAuthe_Roles">
+    <Key>
+      <PropertyRef Name="idCusAuthe" />
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="idCusAuthe" Type="Int32" Nullable="false" />
+    <Property Name="RoleID" Type="Int32" Nullable="false" />
+    <Property Name="Note" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="cusAuthe" Relationship="Self.FK_cusAuthe_Roles_cusAuthe" FromRole="cusAuthe_Roles" ToRole="cusAuthe" />
+    <NavigationProperty Name="Role" Relationship="Self.FK_cusAuthe_Roles_Role" FromRole="cusAuthe_Roles" ToRole="Role" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="idUser" />
+    </Key>
+    <Property Name="idUser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="accountName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="passWord" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="idCusAuthe" Type="Int32" />
     <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Sex" Type="Boolean" />
@@ -35,12 +66,11 @@
     <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="dateRegistation" Type="DateTime" Precision="0" />
     <Property Name="dateActivated" Type="DateTime" Precision="0" />
-    <Property Name="Decentralization" Type="Boolean" />
-    <Property Name="Active" Type="Boolean" />
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__customer__4BAC3F29" FromRole="Customers" ToRole="Orders" />
+    <NavigationProperty Name="Carts" Relationship="Self.FK__Cart__id_user__38996AB5" FromRole="Customers" ToRole="Cart" />
+    <NavigationProperty Name="cusAuthe" Relationship="Self.FK_Customers_cusAuthe" FromRole="Customers" ToRole="cusAuthe" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_User" FromRole="Customers" ToRole="Orders" />
   </EntityType>
-  <EntityType Name="OrderDatail">
+  <EntityType Name="OrderDetail">
     <Key>
       <PropertyRef Name="orderID" />
       <PropertyRef Name="productID" />
@@ -50,8 +80,8 @@
     <Property Name="unitPrice" Type="Decimal" Precision="18" Scale="0" />
     <Property Name="Quantity" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
     <Property Name="intoMoney" Type="Decimal" Precision="18" Scale="0" />
-    <NavigationProperty Name="Order" Relationship="Self.FK_OrderDatails_Orders" FromRole="OrderDatails" ToRole="Orders" />
-    <NavigationProperty Name="Product" Relationship="Self.FK_OrderDatails_Products" FromRole="OrderDatails" ToRole="Products" />
+    <NavigationProperty Name="Order" Relationship="Self.FK_OrderDetails_Orders" FromRole="OrderDetails" ToRole="Orders" />
+    <NavigationProperty Name="Product" Relationship="Self.FK_OrderDetails_Products" FromRole="OrderDetails" ToRole="Products" />
   </EntityType>
   <EntityType Name="Order">
     <Key>
@@ -62,9 +92,9 @@
     <Property Name="requireDate" Type="DateTime" Precision="0" />
     <Property Name="addressTo" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
     <Property Name="Active" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-    <Property Name="customerID" Type="Int32" />
-    <NavigationProperty Name="Customer" Relationship="Self.FK__Orders__customer__4BAC3F29" FromRole="Orders" ToRole="Customers" />
-    <NavigationProperty Name="OrderDatails" Relationship="Self.FK_OrderDatails_Orders" FromRole="Orders" ToRole="OrderDatails" />
+    <Property Name="CustomerID" Type="Int32" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK_Orders_User" FromRole="Orders" ToRole="Customers" />
+    <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetails_Orders" FromRole="Orders" ToRole="OrderDetails" />
   </EntityType>
   <EntityType Name="Product">
     <Key>
@@ -82,18 +112,18 @@
     <Property Name="productStatus" Type="Boolean" />
     <Property Name="BrandID" Type="Int32" />
     <NavigationProperty Name="Brand" Relationship="Self.FK_Products_Brands" FromRole="Products" ToRole="Brands" />
+    <NavigationProperty Name="Carts" Relationship="Self.FK__Cart__id_product__37A5467C" FromRole="Products" ToRole="Cart" />
     <NavigationProperty Name="Category" Relationship="Self.FK_Products_Categories" FromRole="Products" ToRole="Categories" />
-    <NavigationProperty Name="OrderDatails" Relationship="Self.FK_OrderDatails_Products" FromRole="Products" ToRole="OrderDatails" />
+    <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetails_Products" FromRole="Products" ToRole="OrderDetails" />
   </EntityType>
-  <EntityType Name="sysdiagram">
+  <EntityType Name="Role">
     <Key>
-      <PropertyRef Name="diagram_id" />
+      <PropertyRef Name="RoleID" />
     </Key>
-    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="principal_id" Type="Int32" Nullable="false" />
-    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="version" Type="Int32" />
-    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Detail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="cusAuthe_Roles" Relationship="Self.FK_cusAuthe_Roles_Role" FromRole="Role" ToRole="cusAuthe_Roles" />
   </EntityType>
   <Association Name="FK_Products_Brands">
     <End Role="Brands" Type="Self.Brand" Multiplicity="0..1" />
@@ -104,6 +134,30 @@
       </Principal>
       <Dependent Role="Products">
         <PropertyRef Name="BrandID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Cart__id_product__37A5467C">
+    <End Role="Products" Type="Self.Product" Multiplicity="1" />
+    <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Cart">
+        <PropertyRef Name="id_product" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Cart__id_user__38996AB5">
+    <End Role="Customers" Type="Self.Customer" Multiplicity="1" />
+    <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="idUser" />
+      </Principal>
+      <Dependent Role="Cart">
+        <PropertyRef Name="id_user" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -119,73 +173,133 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Orders__customer__4BAC3F29">
+  <Association Name="FK_cusAuthe_Roles_cusAuthe">
+    <End Role="cusAuthe" Type="Self.cusAuthe" Multiplicity="1" />
+    <End Role="cusAuthe_Roles" Type="Self.cusAuthe_Roles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cusAuthe">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="cusAuthe_Roles">
+        <PropertyRef Name="idCusAuthe" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customers_cusAuthe">
+    <End Role="cusAuthe" Type="Self.cusAuthe" Multiplicity="0..1" />
+    <End Role="Customers" Type="Self.Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cusAuthe">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Customers">
+        <PropertyRef Name="idCusAuthe" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_cusAuthe_Roles_Role">
+    <End Role="Role" Type="Self.Role" Multiplicity="1" />
+    <End Role="cusAuthe_Roles" Type="Self.cusAuthe_Roles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="cusAuthe_Roles">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_User">
     <End Role="Customers" Type="Self.Customer" Multiplicity="0..1" />
     <End Role="Orders" Type="Self.Order" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Customers">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="idUser" />
       </Principal>
       <Dependent Role="Orders">
-        <PropertyRef Name="customerID" />
+        <PropertyRef Name="CustomerID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_OrderDatails_Orders">
+  <Association Name="FK_OrderDetails_Orders">
     <End Role="Orders" Type="Self.Order" Multiplicity="1" />
-    <End Role="OrderDatails" Type="Self.OrderDatail" Multiplicity="*" />
+    <End Role="OrderDetails" Type="Self.OrderDetail" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Orders">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="OrderDatails">
+      <Dependent Role="OrderDetails">
         <PropertyRef Name="orderID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_OrderDatails_Products">
+  <Association Name="FK_OrderDetails_Products">
     <End Role="Products" Type="Self.Product" Multiplicity="1" />
-    <End Role="OrderDatails" Type="Self.OrderDatail" Multiplicity="*" />
+    <End Role="OrderDetails" Type="Self.OrderDetail" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Products">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="OrderDatails">
+      <Dependent Role="OrderDetails">
         <PropertyRef Name="productID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="DBLaptopEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Brands" EntityType="Self.Brand" />
+    <EntitySet Name="Carts" EntityType="Self.Cart" />
     <EntitySet Name="Categories" EntityType="Self.Category" />
+    <EntitySet Name="cusAuthes" EntityType="Self.cusAuthe" />
+    <EntitySet Name="cusAuthe_Roles" EntityType="Self.cusAuthe_Roles" />
     <EntitySet Name="Customers" EntityType="Self.Customer" />
-    <EntitySet Name="OrderDatails" EntityType="Self.OrderDatail" />
+    <EntitySet Name="OrderDetails" EntityType="Self.OrderDetail" />
     <EntitySet Name="Orders" EntityType="Self.Order" />
     <EntitySet Name="Products" EntityType="Self.Product" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Roles" EntityType="Self.Role" />
     <AssociationSet Name="FK_Products_Brands" Association="Self.FK_Products_Brands">
       <End Role="Brands" EntitySet="Brands" />
       <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Cart__id_product__37A5467C" Association="Self.FK__Cart__id_product__37A5467C">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="Cart" EntitySet="Carts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Cart__id_user__38996AB5" Association="Self.FK__Cart__id_user__38996AB5">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="Cart" EntitySet="Carts" />
     </AssociationSet>
     <AssociationSet Name="FK_Products_Categories" Association="Self.FK_Products_Categories">
       <End Role="Categories" EntitySet="Categories" />
       <End Role="Products" EntitySet="Products" />
     </AssociationSet>
-    <AssociationSet Name="FK__Orders__customer__4BAC3F29" Association="Self.FK__Orders__customer__4BAC3F29">
+    <AssociationSet Name="FK_cusAuthe_Roles_cusAuthe" Association="Self.FK_cusAuthe_Roles_cusAuthe">
+      <End Role="cusAuthe" EntitySet="cusAuthes" />
+      <End Role="cusAuthe_Roles" EntitySet="cusAuthe_Roles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customers_cusAuthe" Association="Self.FK_Customers_cusAuthe">
+      <End Role="cusAuthe" EntitySet="cusAuthes" />
+      <End Role="Customers" EntitySet="Customers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_cusAuthe_Roles_Role" Association="Self.FK_cusAuthe_Roles_Role">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="cusAuthe_Roles" EntitySet="cusAuthe_Roles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_User" Association="Self.FK_Orders_User">
       <End Role="Customers" EntitySet="Customers" />
       <End Role="Orders" EntitySet="Orders" />
     </AssociationSet>
-    <AssociationSet Name="FK_OrderDatails_Orders" Association="Self.FK_OrderDatails_Orders">
+    <AssociationSet Name="FK_OrderDetails_Orders" Association="Self.FK_OrderDetails_Orders">
       <End Role="Orders" EntitySet="Orders" />
-      <End Role="OrderDatails" EntitySet="OrderDatails" />
+      <End Role="OrderDetails" EntitySet="OrderDetails" />
     </AssociationSet>
-    <AssociationSet Name="FK_OrderDatails_Products" Association="Self.FK_OrderDatails_Products">
+    <AssociationSet Name="FK_OrderDetails_Products" Association="Self.FK_OrderDetails_Products">
       <End Role="Products" EntitySet="Products" />
-      <End Role="OrderDatails" EntitySet="OrderDatails" />
+      <End Role="OrderDetails" EntitySet="OrderDetails" />
     </AssociationSet>
     <FunctionImport Name="C_Customers">
       <Parameter Name="accountName" Mode="In" Type="String" />
       <Parameter Name="passWord" Mode="In" Type="String" />
+      <Parameter Name="idCusAuthe" Mode="In" Type="Int32" />
       <Parameter Name="FirstName" Mode="In" Type="String" />
       <Parameter Name="LastName" Mode="In" Type="String" />
       <Parameter Name="Sex" Mode="In" Type="Boolean" />
@@ -194,46 +308,18 @@
       <Parameter Name="Email" Mode="In" Type="String" />
       <Parameter Name="dateRegistation" Mode="In" Type="DateTime" />
       <Parameter Name="dateActivated" Mode="In" Type="DateTime" />
-      <Parameter Name="Decentralization" Mode="In" Type="Boolean" />
-      <Parameter Name="Active" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="Delete_Customer">
+      <Parameter Name="idUser" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="F_getCustomerByID" IsComposable="true" EntitySet="Customers" ReturnType="Collection(DBLaptopModel.Customer)">
       <Parameter Name="id" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="sp_alterdiagram">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-      <Parameter Name="version" Mode="In" Type="Int32" />
-      <Parameter Name="definition" Mode="In" Type="Binary" />
-    </FunctionImport>
-    <FunctionImport Name="sp_creatediagram">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-      <Parameter Name="version" Mode="In" Type="Int32" />
-      <Parameter Name="definition" Mode="In" Type="Binary" />
-    </FunctionImport>
-    <FunctionImport Name="sp_dropdiagram">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(DBLaptopModel.sp_helpdiagramdefinition_Result)">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(DBLaptopModel.sp_helpdiagrams_Result)">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="sp_renamediagram">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-      <Parameter Name="new_diagramname" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="sp_upgraddiagrams" />
     <FunctionImport Name="Update_Customers">
-      <Parameter Name="id" Mode="In" Type="Int32" />
+      <Parameter Name="idUser" Mode="In" Type="Int32" />
       <Parameter Name="accountName" Mode="In" Type="String" />
       <Parameter Name="passWord" Mode="In" Type="String" />
+      <Parameter Name="idCusAuthe" Mode="In" Type="Int32" />
       <Parameter Name="FirstName" Mode="In" Type="String" />
       <Parameter Name="LastName" Mode="In" Type="String" />
       <Parameter Name="Sex" Mode="In" Type="Boolean" />
@@ -242,16 +328,13 @@
       <Parameter Name="Email" Mode="In" Type="String" />
       <Parameter Name="dateRegistation" Mode="In" Type="DateTime" />
       <Parameter Name="dateActivated" Mode="In" Type="DateTime" />
-      <Parameter Name="Decentralization" Mode="In" Type="Boolean" />
-      <Parameter Name="Active" Mode="In" Type="Boolean" />
-    </FunctionImport>
-    <FunctionImport Name="Delete_Customer">
-      <Parameter Name="id" Mode="In" Type="Int32" />
     </FunctionImport>
   </EntityContainer>
   <ComplexType Name="F_getCustomerByID_Result">
+    <Property Type="Int32" Name="idUser" Nullable="false" />
     <Property Type="String" Name="accountName" Nullable="false" MaxLength="50" />
     <Property Type="String" Name="passWord" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="idCusAuthe" Nullable="true" />
     <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
     <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
     <Property Type="Boolean" Name="Sex" Nullable="true" />
@@ -260,19 +343,5 @@
     <Property Type="String" Name="Email" Nullable="false" MaxLength="250" />
     <Property Type="DateTime" Name="dateRegistation" Nullable="true" Precision="10" />
     <Property Type="DateTime" Name="dateActivated" Nullable="true" Precision="10" />
-    <Property Type="Boolean" Name="Decentralization" Nullable="true" />
-    <Property Type="Boolean" Name="Active" Nullable="true" />
-    <Property Type="Int32" Name="id" Nullable="false" />
-  </ComplexType>
-  <ComplexType Name="sp_helpdiagramdefinition_Result">
-    <Property Type="Int32" Name="version" Nullable="true" />
-    <Property Type="Binary" Name="definition" Nullable="true" />
-  </ComplexType>
-  <ComplexType Name="sp_helpdiagrams_Result">
-    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
-    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
-    <Property Type="Int32" Name="ID" Nullable="false" />
-    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
-    <Property Type="Int32" Name="OwnerID" Nullable="false" />
   </ComplexType>
 </Schema>

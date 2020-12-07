@@ -17,7 +17,7 @@ namespace Laptop_Shop.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Order()
         {
-            this.OrderDatails = new HashSet<OrderDatail>();
+            this.OrderDetails = new HashSet<OrderDetail>();
         }
     
         public int ID { get; set; }
@@ -25,10 +25,10 @@ namespace Laptop_Shop.Models
         public Nullable<System.DateTime> requireDate { get; set; }
         public string addressTo { get; set; }
         public string Active { get; set; }
-        public Nullable<int> customerID { get; set; }
+        public Nullable<int> CustomerID { get; set; }
     
         public virtual Customer Customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderDatail> OrderDatails { get; set; }
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

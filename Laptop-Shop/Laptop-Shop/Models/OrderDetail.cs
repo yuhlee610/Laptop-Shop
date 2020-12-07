@@ -10,13 +10,17 @@
 namespace Laptop_Shop.Models
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class sp_helpdiagrams_Result
+    public partial class OrderDetail
     {
-        public string Database { get; set; }
-        public string Name { get; set; }
-        public int ID { get; set; }
-        public string Owner { get; set; }
-        public int OwnerID { get; set; }
+        public int orderID { get; set; }
+        public int productID { get; set; }
+        public Nullable<decimal> unitPrice { get; set; }
+        public string Quantity { get; set; }
+        public Nullable<decimal> intoMoney { get; set; }
+    
+        public virtual Order Order { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

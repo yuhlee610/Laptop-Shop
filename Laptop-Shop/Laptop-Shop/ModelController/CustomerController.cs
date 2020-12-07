@@ -34,6 +34,7 @@ namespace Laptop_Shop.ModelController
                     _context.C_Customers(
                    cus.accountName,
                    cus.passWord,
+                   cus.idCusAuthe,
                    cus.FirstName,
                    cus.LastName,
                    cus.Sex,
@@ -41,9 +42,7 @@ namespace Laptop_Shop.ModelController
                    cus.phoneNumber,
                    cus.Email,
                    cus.dateRegistation,
-                   cus.dateActivated,
-                   cus.Decentralization,
-                   cus.Active);
+                   cus.dateActivated);
                     return true;
                 }
                 else
@@ -64,9 +63,8 @@ namespace Laptop_Shop.ModelController
         {
             using (var _context = new DBLaptopEntities())
             {
-                _context.Update_Customers(cus.id, cus.accountName, cus.passWord, cus.FirstName, cus.LastName,
-                    cus.Sex, cus.Address, cus.phoneNumber, cus.Email,
-                    cus.dateRegistation, cus.dateActivated, cus.Decentralization, cus.Active);
+                _context.Update_Customers(cus.idUser, cus.accountName, cus.passWord,cus.idCusAuthe, cus.FirstName, cus.LastName,
+                    cus.Sex, cus.Address, cus.phoneNumber, cus.Email,cus.dateRegistation,cus.dateActivated);
             }
         }
         public static void DeleteCustomer(int id)
@@ -80,7 +78,8 @@ namespace Laptop_Shop.ModelController
         {
             using(var _context=new DBLaptopEntities())
             {
-                var res = _context.Database.SqlQuery<bool>("select dbo.vaValidEmail('"+email+"'letranduchuy@gmail.com')").FirstOrDefault();
+                string x = "select dbo.vaValidEmail(" + "'" + email + "'" + ")";
+                var res = _context.Database.SqlQuery<bool>("select dbo.vaValidEmail("+"'"+email+"'"+")").FirstOrDefault();
                 return res;
             }
         }

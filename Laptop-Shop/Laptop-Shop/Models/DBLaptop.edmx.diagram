@@ -4,19 +4,27 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="8ae53a3cc2834a4b8177131cc6414b18" Name="Diagram1">
-        <EntityTypeShape EntityType="DBLaptopModel.Brand" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBLaptopModel.Category" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBLaptopModel.Customer" Width="1.5" PointX="0.75" PointY="9" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBLaptopModel.OrderDatail" Width="1.5" PointX="5.25" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBLaptopModel.Order" Width="1.5" PointX="3" PointY="9.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBLaptopModel.Product" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBLaptopModel.sysdiagram" Width="1.5" PointX="2.75" PointY="5.75" IsExpanded="true" />
+      <Diagram DiagramId="fde4986dde6549cf8e540fe1708c7dc9" Name="Diagram1">
+        <EntityTypeShape EntityType="DBLaptopModel.Brand" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBLaptopModel.Cart" Width="1.5" PointX="5.25" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBLaptopModel.Category" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBLaptopModel.cusAuthe" Width="1.5" PointX="1.5" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBLaptopModel.cusAuthe_Roles" Width="1.5" PointX="3.75" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBLaptopModel.Customer" Width="1.5" PointX="0.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBLaptopModel.OrderDetail" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBLaptopModel.Order" Width="1.5" PointX="3" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBLaptopModel.Product" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBLaptopModel.Role" Width="1.5" PointX="1.5" PointY="16.25" IsExpanded="true" />
         <AssociationConnector Association="DBLaptopModel.FK_Products_Brands" ManuallyRouted="false" />
+        <AssociationConnector Association="DBLaptopModel.FK__Cart__id_product__37A5467C" ManuallyRouted="false" />
+        <AssociationConnector Association="DBLaptopModel.FK__Cart__id_user__38996AB5" ManuallyRouted="false" />
         <AssociationConnector Association="DBLaptopModel.FK_Products_Categories" ManuallyRouted="false" />
-        <AssociationConnector Association="DBLaptopModel.FK__Orders__customer__4BAC3F29" ManuallyRouted="false" />
-        <AssociationConnector Association="DBLaptopModel.FK_OrderDatails_Orders" ManuallyRouted="false" />
-        <AssociationConnector Association="DBLaptopModel.FK_OrderDatails_Products" ManuallyRouted="false" />
+        <AssociationConnector Association="DBLaptopModel.FK_cusAuthe_Roles_cusAuthe" ManuallyRouted="false" />
+        <AssociationConnector Association="DBLaptopModel.FK_Customers_cusAuthe" ManuallyRouted="false" />
+        <AssociationConnector Association="DBLaptopModel.FK_cusAuthe_Roles_Role" ManuallyRouted="false" />
+        <AssociationConnector Association="DBLaptopModel.FK_Orders_User" ManuallyRouted="false" />
+        <AssociationConnector Association="DBLaptopModel.FK_OrderDetails_Orders" ManuallyRouted="false" />
+        <AssociationConnector Association="DBLaptopModel.FK_OrderDetails_Products" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

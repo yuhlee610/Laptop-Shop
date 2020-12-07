@@ -36,10 +36,10 @@
                             <tr>
 
                                 <th>Tài khoản</th>
+                                <th>Họ</th>
                                 <th>Tên</th>
                                 <th>Email</th>
                                 <th>Trạng thái</th>
-                                <th>Phân quyền</th>
                                 <th>#</th>
                             </tr>
                         </thead>
@@ -48,20 +48,19 @@
                             {
                                 foreach (var item in Model)
                                 {
-                                    <tr id="row_@item.id">
+                                    <tr id="row_@item.idUser">
 
                                         <td>@item.accountName</td>
+                                        <td>@item.FirstName</td>
                                         <td>@item.LastName</td>
                                         <td>@item.Email</td>
-                                        <td>@item.Active</td>
-                                        <td>@item.Decentralization</td>
                                         <td>
-                                            <a href="/Admin/ManageCustomers/Edit/@item.id">Sửa</a>
+                                            <a href="/Admin/ManageCustomers/Edit/@item.idUser">Sửa</a>
                                             |
-                                            @Ajax.ActionLink("Xoá", "Delete", new { @id = item.id }, new AjaxOptions
+                                            @Ajax.ActionLink("Xoá", "Delete", new { @id = item.idUser }, new AjaxOptions
                                        {
                                            Confirm = "Bạn có muốn xoá bản ghi này?",
-                                           OnComplete = "$('#row_" + @item.id + "').remove()",
+                                           OnComplete = "$('#row_" + @item.idUser + "').remove()",
                                            HttpMethod = "Delete"
                                        })
                                         </td>

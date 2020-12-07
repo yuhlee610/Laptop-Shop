@@ -23,7 +23,6 @@ namespace Laptop_Shop.Models
         public int ID { get; set; }
         public string cateName { get; set; }
         public string cateDescription { get; set; }
-        public string catePicture { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Products { get; set; }

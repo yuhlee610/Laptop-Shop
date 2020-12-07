@@ -10,10 +10,15 @@
 namespace Laptop_Shop.Models
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class sp_helpdiagramdefinition_Result
+    public partial class cusAuthe_Roles
     {
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public int idCusAuthe { get; set; }
+        public int RoleID { get; set; }
+        public string Note { get; set; }
+    
+        public virtual cusAuthe cusAuthe { get; set; }
+        public virtual Role Role { get; set; }
     }
 }

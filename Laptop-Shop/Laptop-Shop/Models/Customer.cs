@@ -17,11 +17,14 @@ namespace Laptop_Shop.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Customer()
         {
+            this.Carts = new HashSet<Cart>();
             this.Orders = new HashSet<Order>();
         }
     
+        public int idUser { get; set; }
         public string accountName { get; set; }
         public string passWord { get; set; }
+        public Nullable<int> idCusAuthe { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public Nullable<bool> Sex { get; set; }
@@ -30,10 +33,10 @@ namespace Laptop_Shop.Models
         public string Email { get; set; }
         public Nullable<System.DateTime> dateRegistation { get; set; }
         public Nullable<System.DateTime> dateActivated { get; set; }
-        public Nullable<bool> Decentralization { get; set; }
-        public Nullable<bool> Active { get; set; }
-        public int id { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Cart> Carts { get; set; }
+        public virtual cusAuthe cusAuthe { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }
     }

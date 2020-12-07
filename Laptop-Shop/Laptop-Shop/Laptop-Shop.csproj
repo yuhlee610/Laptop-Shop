@@ -146,7 +146,16 @@
     <Compile Include="Models\Brand.cs">
       <DependentUpon>DBLaptop.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Cart.cs">
+      <DependentUpon>DBLaptop.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Category.cs">
+      <DependentUpon>DBLaptop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\cusAuthe.cs">
+      <DependentUpon>DBLaptop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\cusAuthe_Roles.cs">
       <DependentUpon>DBLaptop.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Customer.cs">
@@ -173,19 +182,13 @@
     <Compile Include="Models\Order.cs">
       <DependentUpon>DBLaptop.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\OrderDatail.cs">
+    <Compile Include="Models\OrderDetail.cs">
       <DependentUpon>DBLaptop.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Product.cs">
       <DependentUpon>DBLaptop.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>DBLaptop.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_helpdiagrams_Result.cs">
-      <DependentUpon>DBLaptop.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagram.cs">
+    <Compile Include="Models\Role.cs">
       <DependentUpon>DBLaptop.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -209,8 +212,8 @@
     <Content Include="js\scripts.js" />
     <Content Include="Models\DBLaptop.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>DBLaptop.Context.cs</LastGenOutput>
       <DependentUpon>DBLaptop.edmx</DependentUpon>
+      <LastGenOutput>DBLaptop.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\DBLaptop.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -220,6 +223,10 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\Shared\_LayoutAdmin.cshtml" />
+    <Content Include="Areas\Admin\Views\ManageCustomers\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ManageCustomers\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\ManageCustomers\Edit.cshtml" />
     <EntityDeploy Include="Models\DBLaptop.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>DBLaptop.Designer.cs</LastGenOutput>
@@ -227,10 +234,6 @@
     <Content Include="Models\DBLaptop.edmx.diagram">
       <DependentUpon>DBLaptop.edmx</DependentUpon>
     </Content>
-    <Content Include="Areas\Admin\Views\Shared\_LayoutAdmin.cshtml" />
-    <Content Include="Areas\Admin\Views\ManageCustomers\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\ManageCustomers\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\ManageCustomers\Edit.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

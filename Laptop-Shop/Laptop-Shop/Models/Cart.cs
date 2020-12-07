@@ -12,12 +12,13 @@ namespace Laptop_Shop.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class sysdiagram
+    public partial class Cart
     {
-        public string name { get; set; }
-        public int principal_id { get; set; }
-        public int diagram_id { get; set; }
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public int id_user { get; set; }
+        public int id_product { get; set; }
+        public Nullable<int> count { get; set; }
+    
+        public virtual Product Product { get; set; }
+        public virtual Customer Customer { get; set; }
     }
 }

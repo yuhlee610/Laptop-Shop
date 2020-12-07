@@ -12,20 +12,21 @@ namespace Laptop_Shop.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Brand
+    public partial class cusAuthe
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Brand()
+        public cusAuthe()
         {
-            this.Products = new HashSet<Product>();
+            this.cusAuthe_Roles = new HashSet<cusAuthe_Roles>();
+            this.Customers = new HashSet<Customer>();
         }
     
-        public int ID { get; set; }
-        public string brandName { get; set; }
-        public string brandDescription { get; set; }
-        public string brandHomePage { get; set; }
+        public int id { get; set; }
+        public string nameAuthe { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<cusAuthe_Roles> cusAuthe_Roles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Customer> Customers { get; set; }
     }
 }
