@@ -1,23 +1,22 @@
-﻿CREATE PROC [dbo].[C_Customers]
+﻿use DBLaptop
+CREATE PROC [dbo].[C_Customers]
 @accountName nvarchar(50),
 @passWord nvarchar(50),
+@idCusAuthe int,
 @FirstName nvarchar(50),
 @LastName nvarchar(50),
 @Sex bit,
 @Address nvarchar(250),
 @phoneNumber nvarchar(250),
 @Email nvarchar(250),
-@dateRegistation nchar(10),
-@dateActivated date,
-@Decentralization bit,
-@Active bit
-
+@dateRegistation date,
+@dateActivated date
 AS
 BEGIN TRAN
 	IF NOT EXISTS(SELECT * FROM Customers WHERE accountName = @accountName)		
 		BEGIN 
-			INSERT INTO Customers(accountName, passWord, FirstName, LastName, Sex, Address, phoneNumber, Email, dateRegistation, dateActivated, Decentralization, Active)
-			VALUES(@accountName, @passWord, @FirstName, @LastName, @Sex, @Address, @phoneNumber, @Email, @dateRegistation, @dateActivated, @Decentralization, @Active);
+			INSERT INTO Customers(accountName, passWord,idCusAuthe, FirstName, LastName, Sex, Address, phoneNumber, Email, dateRegistation, dateActivated)
+			VALUES(@accountName, @passWord, @idCusAuthe, @FirstName, @LastName, @Sex, @Address, @phoneNumber, @Email, @dateRegistation, @dateActivated);
 			COMMIT;
 		END
 	ELSE
@@ -29,36 +28,34 @@ GO
 CREATE FUNCTION F_getCustomerByID(@id int)
 RETURNS TABLE
 AS
-	RETURN SELECT * FROM Customers WHERE id=@id
+	RETURN SELECT * FROM Customers WHERE idUser=@id
 
-select * from F_getCustomerByID(3)
 
 CREATE PROC [dbo].[Update_Customers]
-@id int,
+@idUser int,
 @accountName nvarchar(50),
 @passWord nvarchar(50),
+@idCusAuthe int,
 @FirstName nvarchar(50),
 @LastName nvarchar(50),
 @Sex bit,
 @Address nvarchar(250),
 @phoneNumber nvarchar(250),
 @Email nvarchar(250),
-@dateRegistation nchar(10),
-@dateActivated date,
-@Decentralization bit,
-@Active bit
+@dateRegistation date,
+@dateActivated date
 AS
 BEGIN
 	UPDATE Customers
-	SET accountName=@accountName, passWord=@passWord, FirstName=@FirstName, LastName=@LastName, Sex=@Sex, Address=@Address, phoneNumber=@phoneNumber, Email=@Email, dateRegistation=@dateRegistation, dateActivated=@dateRegistation, Decentralization=@Decentralization, Active=@Active
-	WHERE id=@id
+	SET accountName=@accountName, passWord=@passWord, idCusAuthe=@idCusAuthe, FirstName=@FirstName, LastName=@LastName, Sex=@Sex, Address=@Address, phoneNumber=@phoneNumber, Email=@Email, dateRegistation=@dateRegistation, dateActivated=@dateRegistation
+	WHERE idUser=@idUser
 END
 GO
 
-create procedure Delete_Customer @id int
+create procedure Delete_Customer @idUser int
 as
 begin
-	DELETE FROM Customers WHERE id=@id
+	DELETE FROM Customers WHERE idUser=@idUser
 end
 
 --Xác thực email
@@ -73,4 +70,4 @@ BEGIN
   RETURN @bitRetVal
 END 
 
-select dbo.vaValidEmail('letranduchuy@gmail.com')
+select dbo.vaValidEmail('nghia@gmail.com')
