@@ -135,12 +135,14 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\ManageCustomersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="ModelController\BaseController.cs" />
+    <Compile Include="ModelController\CateController.cs" />
     <Compile Include="ModelController\CustomerController.cs" />
     <Compile Include="ModelController\Encrypt.cs" />
     <Compile Include="Models\Brand.cs">
@@ -179,6 +181,9 @@
     <Compile Include="Models\F_getCustomerByID_Result.cs">
       <DependentUpon>DBLaptop.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\get_a_cate_Result.cs">
+      <DependentUpon>DBLaptop.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Order.cs">
       <DependentUpon>DBLaptop.tt</DependentUpon>
     </Compile>
@@ -189,6 +194,24 @@
       <DependentUpon>DBLaptop.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Role.cs">
+      <DependentUpon>DBLaptop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\search_cate_Result.cs">
+      <DependentUpon>DBLaptop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>DBLaptop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams1_Result.cs">
+      <DependentUpon>DBLaptop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams_Result.cs">
+      <DependentUpon>DBLaptop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>DBLaptop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\view_list_Category.cs">
       <DependentUpon>DBLaptop.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -234,6 +257,9 @@
     <Content Include="Models\DBLaptop.edmx.diagram">
       <DependentUpon>DBLaptop.edmx</DependentUpon>
     </Content>
+    <Content Include="Areas\Admin\Views\Category\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\FormAddCate.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\Edit.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

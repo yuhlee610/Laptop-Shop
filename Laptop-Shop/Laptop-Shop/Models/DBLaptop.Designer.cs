@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\Admin\Desktop\Laptop-Shop\Laptop-Shop\Laptop-Shop\Models\DBLaptop.edmx'. 
+﻿// T4 code generation is enabled for model 'E:\Nam3\Database Management Systems\Laptop-Shop\Laptop-Shop\Laptop-Shop\Models\DBLaptop.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

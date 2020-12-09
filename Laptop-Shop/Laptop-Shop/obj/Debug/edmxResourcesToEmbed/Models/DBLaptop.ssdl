@@ -105,7 +105,27 @@
     <Property Name="RoleName" Type="nvarchar" MaxLength="50" />
     <Property Name="Detail" Type="nvarchar" MaxLength="50" />
   </EntityType>
-  <Association Name="FK__Cart__id_product__37A5467C">
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DBLaptop.dbo.view_list_Category' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="view_list_Category">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cateName" Type="nvarchar" MaxLength="50" />
+    <Property Name="cateDescription" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK__Cart__id_product__49C3F6B7">
     <End Role="Products" Type="Self.Products" Multiplicity="1" />
     <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
     <ReferentialConstraint>
@@ -117,7 +137,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Cart__id_user__38996AB5">
+  <Association Name="FK__Cart__id_user__4AB81AF0">
     <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
     <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
     <ReferentialConstraint>
@@ -225,6 +245,10 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="Add_new_Cate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="cateName" Type="nvarchar" Mode="In" />
+    <Parameter Name="cateDescription" Type="nvarchar" Mode="In" />
+  </Function>
   <Function Name="C_Customers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="accountName" Type="nvarchar" Mode="In" />
     <Parameter Name="passWord" Type="nvarchar" Mode="In" />
@@ -238,8 +262,16 @@
     <Parameter Name="dateRegistation" Type="date" Mode="In" />
     <Parameter Name="dateActivated" Type="date" Mode="In" />
   </Function>
+  <Function Name="del_cate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idcate" Type="int" Mode="In" />
+  </Function>
   <Function Name="Delete_Customer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="idUser" Type="int" Mode="In" />
+  </Function>
+  <Function Name="edit_cate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+    <Parameter Name="nameCate" Type="nvarchar" Mode="In" />
+    <Parameter Name="desCate" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="F_getCustomerByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="id" Type="int" Mode="In" />
@@ -262,6 +294,43 @@
       </CollectionType>
     </ReturnType>
   </Function>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="get_a_cate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="search_cate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="namecate" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="Update_Customers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="idUser" Type="int" Mode="In" />
     <Parameter Name="accountName" Type="nvarchar" Mode="In" />
@@ -290,11 +359,19 @@
     <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__Cart__id_product__37A5467C" Association="Self.FK__Cart__id_product__37A5467C">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="view_list_Category" EntityType="Self.view_list_Category" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [view_list_Category].[ID] AS [ID], 
+    [view_list_Category].[cateName] AS [cateName], 
+    [view_list_Category].[cateDescription] AS [cateDescription]
+    FROM [dbo].[view_list_Category] AS [view_list_Category]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK__Cart__id_product__49C3F6B7" Association="Self.FK__Cart__id_product__49C3F6B7">
       <End Role="Products" EntitySet="Products" />
       <End Role="Cart" EntitySet="Cart" />
     </AssociationSet>
-    <AssociationSet Name="FK__Cart__id_user__38996AB5" Association="Self.FK__Cart__id_user__38996AB5">
+    <AssociationSet Name="FK__Cart__id_user__4AB81AF0" Association="Self.FK__Cart__id_user__4AB81AF0">
       <End Role="Customers" EntitySet="Customers" />
       <End Role="Cart" EntitySet="Cart" />
     </AssociationSet>

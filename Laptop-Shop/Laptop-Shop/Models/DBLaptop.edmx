@@ -110,7 +110,27 @@
           <Property Name="RoleName" Type="nvarchar" MaxLength="50" />
           <Property Name="Detail" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <Association Name="FK__Cart__id_product__37A5467C">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBLaptop.dbo.view_list_Category' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="view_list_Category">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cateName" Type="nvarchar" MaxLength="50" />
+          <Property Name="cateDescription" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__Cart__id_product__49C3F6B7">
           <End Role="Products" Type="Self.Products" Multiplicity="1" />
           <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
           <ReferentialConstraint>
@@ -122,7 +142,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Cart__id_user__38996AB5">
+        <Association Name="FK__Cart__id_user__4AB81AF0">
           <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
           <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
           <ReferentialConstraint>
@@ -230,6 +250,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="Add_new_Cate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cateName" Type="nvarchar" Mode="In" />
+          <Parameter Name="cateDescription" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="C_Customers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="accountName" Type="nvarchar" Mode="In" />
           <Parameter Name="passWord" Type="nvarchar" Mode="In" />
@@ -243,8 +267,16 @@
           <Parameter Name="dateRegistation" Type="date" Mode="In" />
           <Parameter Name="dateActivated" Type="date" Mode="In" />
         </Function>
+        <Function Name="del_cate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idcate" Type="int" Mode="In" />
+        </Function>
         <Function Name="Delete_Customer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idUser" Type="int" Mode="In" />
+        </Function>
+        <Function Name="edit_cate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="nameCate" Type="nvarchar" Mode="In" />
+          <Parameter Name="desCate" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="F_getCustomerByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
@@ -267,6 +299,43 @@
             </CollectionType>
           </ReturnType>
         </Function>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="get_a_cate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="search_cate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="namecate" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="Update_Customers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idUser" Type="int" Mode="In" />
           <Parameter Name="accountName" Type="nvarchar" Mode="In" />
@@ -295,11 +364,19 @@
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Cart__id_product__37A5467C" Association="Self.FK__Cart__id_product__37A5467C">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="view_list_Category" EntityType="Self.view_list_Category" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [view_list_Category].[ID] AS [ID], 
+    [view_list_Category].[cateName] AS [cateName], 
+    [view_list_Category].[cateDescription] AS [cateDescription]
+    FROM [dbo].[view_list_Category] AS [view_list_Category]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__Cart__id_product__49C3F6B7" Association="Self.FK__Cart__id_product__49C3F6B7">
             <End Role="Products" EntitySet="Products" />
             <End Role="Cart" EntitySet="Cart" />
           </AssociationSet>
-          <AssociationSet Name="FK__Cart__id_user__38996AB5" Association="Self.FK__Cart__id_user__38996AB5">
+          <AssociationSet Name="FK__Cart__id_user__4AB81AF0" Association="Self.FK__Cart__id_user__4AB81AF0">
             <End Role="Customers" EntitySet="Customers" />
             <End Role="Cart" EntitySet="Cart" />
           </AssociationSet>
@@ -669,6 +746,73 @@
             <Parameter Name="dateRegistation" Mode="In" Type="DateTime" />
             <Parameter Name="dateActivated" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <EntitySet Name="sysdiagrams" EntityType="DBLaptopModel.sysdiagram" />
+          <EntitySet Name="view_list_Category" EntityType="DBLaptopModel.view_list_Category" />
+          <FunctionImport Name="Add_new_Cate">
+            <Parameter Name="cateName" Mode="In" Type="String" />
+            <Parameter Name="cateDescription" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(DBLaptopModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(DBLaptopModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="sp_alterdiagram1">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram1">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams1" ReturnType="Collection(DBLaptopModel.sp_helpdiagrams1_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams1" />
+          <FunctionImport Name="del_cate">
+          <Parameter Name="idcate" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="edit_cate">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="nameCate" Mode="In" Type="String" />
+            <Parameter Name="desCate" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="get_a_cate" ReturnType="Collection(DBLaptopModel.get_a_cate_Result)">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="search_cate" ReturnType="Collection(DBLaptopModel.search_cate_Result)">
+            <Parameter Name="namecate" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="F_getCustomerByID_Result">
           <Property Type="Int32" Name="idUser" Nullable="false" />
@@ -683,6 +827,51 @@
           <Property Type="String" Name="Email" Nullable="false" MaxLength="250" />
           <Property Type="DateTime" Name="dateRegistation" Nullable="true" Precision="10" />
           <Property Type="DateTime" Name="dateActivated" Nullable="true" Precision="10" />
+        </ComplexType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="view_list_Category">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cateName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cateDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams1_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="get_a_cate_Result">
+          <Property Type="String" Name="cateName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="cateDescription" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="search_cate_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="cateName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="cateDescription" Nullable="true" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -807,6 +996,70 @@
           <FunctionImportMapping FunctionImportName="F_getCustomerByID" FunctionName="DBLaptopModel.Store.F_getCustomerByID">
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Update_Customers" FunctionName="DBLaptopModel.Store.Update_Customers" />
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="DBLaptopModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="view_list_Category">
+            <EntityTypeMapping TypeName="DBLaptopModel.view_list_Category">
+              <MappingFragment StoreEntitySet="view_list_Category">
+                <ScalarProperty Name="cateDescription" ColumnName="cateDescription" />
+                <ScalarProperty Name="cateName" ColumnName="cateName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Add_new_Cate" FunctionName="DBLaptopModel.Store.Add_new_Cate" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="DBLaptopModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="DBLaptopModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBLaptopModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="DBLaptopModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram1" FunctionName="DBLaptopModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram1" FunctionName="DBLaptopModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams1" FunctionName="DBLaptopModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBLaptopModel.sp_helpdiagrams1_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams1" FunctionName="DBLaptopModel.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="del_cate" FunctionName="DBLaptopModel.Store.del_cate" />
+          <FunctionImportMapping FunctionImportName="edit_cate" FunctionName="DBLaptopModel.Store.edit_cate" />
+          <FunctionImportMapping FunctionImportName="get_a_cate" FunctionName="DBLaptopModel.Store.get_a_cate">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBLaptopModel.get_a_cate_Result">
+                <ScalarProperty Name="cateName" ColumnName="cateName" />
+                <ScalarProperty Name="cateDescription" ColumnName="cateDescription" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="search_cate" FunctionName="DBLaptopModel.Store.search_cate">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBLaptopModel.search_cate_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="cateName" ColumnName="cateName" />
+                <ScalarProperty Name="cateDescription" ColumnName="cateDescription" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
