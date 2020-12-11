@@ -135,6 +135,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\BrandAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\ManageCustomersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -142,6 +143,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="ModelController\BaseController.cs" />
+    <Compile Include="ModelController\BrandController.cs" />
     <Compile Include="ModelController\CateController.cs" />
     <Compile Include="ModelController\CustomerController.cs" />
     <Compile Include="ModelController\Encrypt.cs" />
@@ -181,6 +183,9 @@
     <Compile Include="Models\F_getCustomerByID_Result.cs">
       <DependentUpon>DBLaptop.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\get_a_Brands_Result.cs">
+      <DependentUpon>DBLaptop.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\get_a_cate_Result.cs">
       <DependentUpon>DBLaptop.tt</DependentUpon>
     </Compile>
@@ -194,6 +199,9 @@
       <DependentUpon>DBLaptop.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Role.cs">
+      <DependentUpon>DBLaptop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\search_Brand_Result.cs">
       <DependentUpon>DBLaptop.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\search_cate_Result.cs">
@@ -212,6 +220,9 @@
       <DependentUpon>DBLaptop.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>DBLaptop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\view_list_Brand.cs">
       <DependentUpon>DBLaptop.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\view_list_Category.cs">
@@ -263,6 +274,9 @@
     <Content Include="Areas\Admin\Views\Category\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Category\FormAddCate.cshtml" />
     <Content Include="Areas\Admin\Views\Category\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\BrandAdmin\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\BrandAdmin\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\BrandAdmin\Edit.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

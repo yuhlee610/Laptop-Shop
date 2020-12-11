@@ -181,5 +181,36 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <EntitySetMapping Name="view_list_Brand">
+      <EntityTypeMapping TypeName="DBLaptopModel.view_list_Brand">
+        <MappingFragment StoreEntitySet="view_list_Brand">
+          <ScalarProperty Name="brandHomePage" ColumnName="brandHomePage" />
+          <ScalarProperty Name="brandDescription" ColumnName="brandDescription" />
+          <ScalarProperty Name="brandName" ColumnName="brandName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="Add_new_Brand" FunctionName="DBLaptopModel.Store.Add_new_Brand" />
+    <FunctionImportMapping FunctionImportName="del_Brands" FunctionName="DBLaptopModel.Store.del_Brands" />
+    <FunctionImportMapping FunctionImportName="edit_Brands" FunctionName="DBLaptopModel.Store.edit_Brands" />
+    <FunctionImportMapping FunctionImportName="get_a_Brands" FunctionName="DBLaptopModel.Store.get_a_Brands">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBLaptopModel.get_a_Brands_Result">
+          <ScalarProperty Name="brandName" ColumnName="brandName" />
+          <ScalarProperty Name="brandDescription" ColumnName="brandDescription" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="search_Brand" FunctionName="DBLaptopModel.Store.search_Brand">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBLaptopModel.search_Brand_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="brandName" ColumnName="brandName" />
+          <ScalarProperty Name="brandDescription" ColumnName="brandDescription" />
+          <ScalarProperty Name="brandHomePage" ColumnName="brandHomePage" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

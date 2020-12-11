@@ -396,6 +396,27 @@
     <FunctionImport Name="search_Cate" ReturnType="Collection(DBLaptopModel.search_Cate_Result1)">
       <Parameter Name="namecate" Mode="In" Type="String" />
     </FunctionImport>
+    <EntitySet Name="view_list_Brand" EntityType="DBLaptopModel.view_list_Brand" />
+    <FunctionImport Name="Add_new_Brand">
+      <Parameter Name="brandName" Mode="In" Type="String" />
+      <Parameter Name="brandDescription" Mode="In" Type="String" />
+      <Parameter Name="brandHomePage" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="del_Brands">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="edit_Brands">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+      <Parameter Name="brandName" Mode="In" Type="String" />
+      <Parameter Name="brandDescription" Mode="In" Type="String" />
+      <Parameter Name="brandHomePage" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="get_a_Brands" ReturnType="Collection(DBLaptopModel.get_a_Brands_Result)">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="search_Brand" ReturnType="Collection(DBLaptopModel.search_Brand_Result)">
+      <Parameter Name="brandName" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="F_getCustomerByID_Result">
     <Property Type="Int32" Name="idUser" Nullable="false" />
@@ -460,5 +481,24 @@
     <Property Type="Int32" Name="ID" Nullable="false" />
     <Property Type="String" Name="cateName" Nullable="true" MaxLength="50" />
     <Property Type="String" Name="cateDescription" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <EntityType Name="view_list_Brand">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="brandName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="brandDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="brandHomePage" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <ComplexType Name="get_a_Brands_Result">
+    <Property Type="String" Name="brandName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="brandDescription" Nullable="true" MaxLength="Max" />
+  </ComplexType>
+  <ComplexType Name="search_Brand_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="brandName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="brandDescription" Nullable="true" MaxLength="Max" />
+    <Property Type="String" Name="brandHomePage" Nullable="true" MaxLength="250" />
   </ComplexType>
 </Schema>

@@ -1,6 +1,6 @@
 USE [master]
 GO
-/****** Object:  Database [DBLaptop]    Script Date: 12/11/2020 10:10:34 AM ******/
+/****** Object:  Database [DBLaptop]    Script Date: 12/11/2020 5:51:15 PM ******/
 CREATE DATABASE [DBLaptop]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -78,7 +78,7 @@ ALTER DATABASE [DBLaptop] SET QUERY_STORE = OFF
 GO
 USE [DBLaptop]
 GO
-/****** Object:  UserDefinedFunction [dbo].[vaValidEmail]    Script Date: 12/11/2020 10:10:35 AM ******/
+/****** Object:  UserDefinedFunction [dbo].[vaValidEmail]    Script Date: 12/11/2020 5:51:16 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -94,7 +94,7 @@ BEGIN
   RETURN @bitRetVal
 END 
 GO
-/****** Object:  Table [dbo].[Categories]    Script Date: 12/11/2020 10:10:35 AM ******/
+/****** Object:  Table [dbo].[Categories]    Script Date: 12/11/2020 5:51:16 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -109,7 +109,7 @@ CREATE TABLE [dbo].[Categories](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  View [dbo].[view_list_Category]    Script Date: 12/11/2020 10:10:35 AM ******/
+/****** Object:  View [dbo].[view_list_Category]    Script Date: 12/11/2020 5:51:16 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -119,7 +119,33 @@ as
 select *
 from Categories
 GO
-/****** Object:  Table [dbo].[Customers]    Script Date: 12/11/2020 10:10:35 AM ******/
+/****** Object:  Table [dbo].[Brands]    Script Date: 12/11/2020 5:51:16 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Brands](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[brandName] [nvarchar](50) NULL,
+	[brandDescription] [text] NULL,
+	[brandHomePage] [nvarchar](250) NULL,
+ CONSTRAINT [PK_Brands] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  View [dbo].[view_list_Brand]    Script Date: 12/11/2020 5:51:16 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create view [dbo].[view_list_Brand]
+as
+select *
+from Brands
+GO
+/****** Object:  Table [dbo].[Customers]    Script Date: 12/11/2020 5:51:16 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -151,7 +177,7 @@ CREATE TABLE [dbo].[Customers](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  UserDefinedFunction [dbo].[F_getCustomerByID]    Script Date: 12/11/2020 10:10:35 AM ******/
+/****** Object:  UserDefinedFunction [dbo].[F_getCustomerByID]    Script Date: 12/11/2020 5:51:16 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -161,23 +187,7 @@ RETURNS TABLE
 AS
 	RETURN SELECT * FROM Customers WHERE idUser=@id
 GO
-/****** Object:  Table [dbo].[Brands]    Script Date: 12/11/2020 10:10:35 AM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[Brands](
-	[ID] [int] IDENTITY(1,1) NOT NULL,
-	[brandName] [nvarchar](50) NULL,
-	[brandDescription] [text] NULL,
-	[brandHomePage] [nvarchar](250) NULL,
- CONSTRAINT [PK_Brands] PRIMARY KEY CLUSTERED 
-(
-	[ID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[Cart]    Script Date: 12/11/2020 10:10:35 AM ******/
+/****** Object:  Table [dbo].[Cart]    Script Date: 12/11/2020 5:51:16 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -193,7 +203,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[cusAuthe]    Script Date: 12/11/2020 10:10:35 AM ******/
+/****** Object:  Table [dbo].[cusAuthe]    Script Date: 12/11/2020 5:51:16 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -207,7 +217,7 @@ CREATE TABLE [dbo].[cusAuthe](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[cusAuthe_Roles]    Script Date: 12/11/2020 10:10:35 AM ******/
+/****** Object:  Table [dbo].[cusAuthe_Roles]    Script Date: 12/11/2020 5:51:16 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -223,7 +233,7 @@ CREATE TABLE [dbo].[cusAuthe_Roles](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[OrderDetails]    Script Date: 12/11/2020 10:10:35 AM ******/
+/****** Object:  Table [dbo].[OrderDetails]    Script Date: 12/11/2020 5:51:16 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -241,7 +251,7 @@ CREATE TABLE [dbo].[OrderDetails](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Orders]    Script Date: 12/11/2020 10:10:35 AM ******/
+/****** Object:  Table [dbo].[Orders]    Script Date: 12/11/2020 5:51:16 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -259,7 +269,7 @@ CREATE TABLE [dbo].[Orders](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Products]    Script Date: 12/11/2020 10:10:35 AM ******/
+/****** Object:  Table [dbo].[Products]    Script Date: 12/11/2020 5:51:16 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -282,7 +292,7 @@ CREATE TABLE [dbo].[Products](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Role]    Script Date: 12/11/2020 10:10:35 AM ******/
+/****** Object:  Table [dbo].[Role]    Script Date: 12/11/2020 5:51:16 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -343,7 +353,25 @@ REFERENCES [dbo].[Categories] ([ID])
 GO
 ALTER TABLE [dbo].[Products] CHECK CONSTRAINT [FK_Products_Categories]
 GO
-/****** Object:  StoredProcedure [dbo].[Add_new_Cate]    Script Date: 12/11/2020 10:10:35 AM ******/
+/****** Object:  StoredProcedure [dbo].[Add_new_Brand]    Script Date: 12/11/2020 5:51:16 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Add_new_Brand] @brandName nvarchar(250), @brandDescription nvarchar(250), @brandHomePage nvarchar(250)
+as
+	if exists( select Top(10) brandName
+				from Brands
+				where brandName=@brandName)
+	begin
+		print 'Ten danh muc da co.'
+	end
+	else
+	begin
+		insert into Brands(brandName,brandDescription,brandHomePage) values(@brandName,@brandDescription,@brandHomePage)
+	end
+GO
+/****** Object:  StoredProcedure [dbo].[Add_new_Cate]    Script Date: 12/11/2020 5:51:16 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -361,7 +389,7 @@ as
 		insert into Categories(cateName,cateDescription) values(@cateName,@cateDescription)
 	end
 GO
-/****** Object:  StoredProcedure [dbo].[C_Customers]    Script Date: 12/11/2020 10:10:35 AM ******/
+/****** Object:  StoredProcedure [dbo].[C_Customers]    Script Date: 12/11/2020 5:51:16 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -391,7 +419,25 @@ BEGIN TRAN
 			ROLLBACK;
 		END
 GO
-/****** Object:  StoredProcedure [dbo].[del_cate]    Script Date: 12/11/2020 10:10:35 AM ******/
+/****** Object:  StoredProcedure [dbo].[del_Brands]    Script Date: 12/11/2020 5:51:16 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[del_Brands] @id int
+as
+	if exists(select brandName
+			  from Brands
+			  where ID=@id)
+	begin
+		delete from Brands where ID=@id
+    end
+		else
+	begin
+			 print 'Danh muc khong ton tai';
+	end
+GO
+/****** Object:  StoredProcedure [dbo].[del_cate]    Script Date: 12/11/2020 5:51:16 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -409,7 +455,7 @@ as
 			print 'Danh muc khong ton tai'
 	end
 GO
-/****** Object:  StoredProcedure [dbo].[Delete_Customer]    Script Date: 12/11/2020 10:10:35 AM ******/
+/****** Object:  StoredProcedure [dbo].[Delete_Customer]    Script Date: 12/11/2020 5:51:16 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -420,7 +466,20 @@ begin
 	DELETE FROM Customers WHERE idUser=@idUser
 end
 GO
-/****** Object:  StoredProcedure [dbo].[edit_cate]    Script Date: 12/11/2020 10:10:35 AM ******/
+/****** Object:  StoredProcedure [dbo].[edit_Brands]    Script Date: 12/11/2020 5:51:16 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create proc [dbo].[edit_Brands] @id int, @brandName nvarchar(50), @brandDescription nvarchar(250),@brandHomePage nvarchar(250) 
+as
+begin 
+	update Brands
+	set brandName=@brandName, brandDescription=@brandDescription,brandHomePage=@brandHomePage
+	where ID=@id
+end
+GO
+/****** Object:  StoredProcedure [dbo].[edit_cate]    Script Date: 12/11/2020 5:51:16 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -433,7 +492,20 @@ begin
 	where ID=@id
 end
 GO
-/****** Object:  StoredProcedure [dbo].[get_a_cate]    Script Date: 12/11/2020 10:10:35 AM ******/
+/****** Object:  StoredProcedure [dbo].[get_a_Brands]    Script Date: 12/11/2020 5:51:16 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create proc [dbo].[get_a_Brands] @id int
+as
+begin
+	select brandName, brandDescription
+	from Brands
+	where ID=@id
+end
+GO
+/****** Object:  StoredProcedure [dbo].[get_a_cate]    Script Date: 12/11/2020 5:51:16 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -446,7 +518,19 @@ begin
 	where ID=@id
 end
 GO
-/****** Object:  StoredProcedure [dbo].[search_Cate]    Script Date: 12/11/2020 10:10:35 AM ******/
+/****** Object:  StoredProcedure [dbo].[search_Brand]    Script Date: 12/11/2020 5:51:16 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[search_Brand] @brandName nvarchar(50)=null
+AS
+SELECT ID, brandName, brandDescription,brandHomePage
+FROM Brands
+WHERE (@brandName IS NULL OR brandName LIKE '%' + @brandName + '%')
+     
+GO
+/****** Object:  StoredProcedure [dbo].[search_Cate]    Script Date: 12/11/2020 5:51:16 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -458,7 +542,7 @@ FROM Categories
 WHERE (@namecate IS NULL OR cateName LIKE '%' + @namecate + '%')
      
 GO
-/****** Object:  StoredProcedure [dbo].[Update_Customers]    Script Date: 12/11/2020 10:10:35 AM ******/
+/****** Object:  StoredProcedure [dbo].[Update_Customers]    Script Date: 12/11/2020 5:51:16 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON

@@ -121,6 +121,17 @@
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'DBLaptop.dbo.view_list_Brand' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="view_list_Brand">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="brandName" Type="nvarchar" MaxLength="50" />
+          <Property Name="brandDescription" Type="text" />
+          <Property Name="brandHomePage" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'DBLaptop.dbo.view_list_Category' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="view_list_Category">
           <Key>
@@ -250,6 +261,11 @@ warning 6002: The table/view 'DBLaptop.dbo.view_list_Category' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="Add_new_Brand" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="brandName" Type="nvarchar" Mode="In" />
+          <Parameter Name="brandDescription" Type="nvarchar" Mode="In" />
+          <Parameter Name="brandHomePage" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="Add_new_Cate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="cateName" Type="nvarchar" Mode="In" />
           <Parameter Name="cateDescription" Type="nvarchar" Mode="In" />
@@ -267,11 +283,20 @@ warning 6002: The table/view 'DBLaptop.dbo.view_list_Category' does not have a p
           <Parameter Name="dateRegistation" Type="date" Mode="In" />
           <Parameter Name="dateActivated" Type="date" Mode="In" />
         </Function>
+        <Function Name="del_Brands" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
         <Function Name="del_cate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
         </Function>
         <Function Name="Delete_Customer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idUser" Type="int" Mode="In" />
+        </Function>
+        <Function Name="edit_Brands" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="brandName" Type="nvarchar" Mode="In" />
+          <Parameter Name="brandDescription" Type="nvarchar" Mode="In" />
+          <Parameter Name="brandHomePage" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="edit_cate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
@@ -300,8 +325,14 @@ warning 6002: The table/view 'DBLaptop.dbo.view_list_Category' does not have a p
           </ReturnType>
         </Function>
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="get_a_Brands" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
         <Function Name="get_a_cate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="search_Brand" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="brandName" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="search_Cate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="namecate" Type="nvarchar" Mode="In" />
@@ -365,6 +396,14 @@ warning 6002: The table/view 'DBLaptop.dbo.view_list_Category' does not have a p
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="view_list_Brand" EntityType="Self.view_list_Brand" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [view_list_Brand].[ID] AS [ID], 
+    [view_list_Brand].[brandName] AS [brandName], 
+    [view_list_Brand].[brandDescription] AS [brandDescription], 
+    [view_list_Brand].[brandHomePage] AS [brandHomePage]
+    FROM [dbo].[view_list_Brand] AS [view_list_Brand]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="view_list_Category" EntityType="Self.view_list_Category" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [view_list_Category].[ID] AS [ID], 
@@ -811,7 +850,28 @@ warning 6002: The table/view 'DBLaptop.dbo.view_list_Category' does not have a p
           <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="search_Cate" ReturnType="Collection(DBLaptopModel.search_Cate_Result1)">
-            <Parameter Name="namecate" Mode="In" Type="String" />
+          <Parameter Name="namecate" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="view_list_Brand" EntityType="DBLaptopModel.view_list_Brand" />
+          <FunctionImport Name="Add_new_Brand">
+            <Parameter Name="brandName" Mode="In" Type="String" />
+            <Parameter Name="brandDescription" Mode="In" Type="String" />
+            <Parameter Name="brandHomePage" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="del_Brands">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="edit_Brands">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="brandName" Mode="In" Type="String" />
+            <Parameter Name="brandDescription" Mode="In" Type="String" />
+            <Parameter Name="brandHomePage" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="get_a_Brands" ReturnType="Collection(DBLaptopModel.get_a_Brands_Result)">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="search_Brand" ReturnType="Collection(DBLaptopModel.search_Brand_Result)">
+          <Parameter Name="brandName" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="F_getCustomerByID_Result">
@@ -877,6 +937,25 @@ warning 6002: The table/view 'DBLaptop.dbo.view_list_Category' does not have a p
           <Property Type="Int32" Name="ID" Nullable="false" />
           <Property Type="String" Name="cateName" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="cateDescription" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <EntityType Name="view_list_Brand">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="brandName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="brandDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="brandHomePage" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <ComplexType Name="get_a_Brands_Result">
+          <Property Type="String" Name="brandName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="brandDescription" Nullable="true" MaxLength="Max" />
+        </ComplexType>
+        <ComplexType Name="search_Brand_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="brandName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="brandDescription" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="brandHomePage" Nullable="true" MaxLength="250" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1062,6 +1141,37 @@ warning 6002: The table/view 'DBLaptop.dbo.view_list_Category' does not have a p
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="cateName" ColumnName="cateName" />
                 <ScalarProperty Name="cateDescription" ColumnName="cateDescription" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="view_list_Brand">
+            <EntityTypeMapping TypeName="DBLaptopModel.view_list_Brand">
+              <MappingFragment StoreEntitySet="view_list_Brand">
+                <ScalarProperty Name="brandHomePage" ColumnName="brandHomePage" />
+                <ScalarProperty Name="brandDescription" ColumnName="brandDescription" />
+                <ScalarProperty Name="brandName" ColumnName="brandName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Add_new_Brand" FunctionName="DBLaptopModel.Store.Add_new_Brand" />
+          <FunctionImportMapping FunctionImportName="del_Brands" FunctionName="DBLaptopModel.Store.del_Brands" />
+          <FunctionImportMapping FunctionImportName="edit_Brands" FunctionName="DBLaptopModel.Store.edit_Brands" />
+          <FunctionImportMapping FunctionImportName="get_a_Brands" FunctionName="DBLaptopModel.Store.get_a_Brands">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBLaptopModel.get_a_Brands_Result">
+                <ScalarProperty Name="brandName" ColumnName="brandName" />
+                <ScalarProperty Name="brandDescription" ColumnName="brandDescription" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="search_Brand" FunctionName="DBLaptopModel.Store.search_Brand">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBLaptopModel.search_Brand_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="brandName" ColumnName="brandName" />
+                <ScalarProperty Name="brandDescription" ColumnName="brandDescription" />
+                <ScalarProperty Name="brandHomePage" ColumnName="brandHomePage" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

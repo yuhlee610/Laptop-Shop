@@ -39,6 +39,7 @@ namespace Laptop_Shop.Models
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<view_list_Category> view_list_Category { get; set; }
+        public virtual DbSet<view_list_Brand> view_list_Brand { get; set; }
     
         public virtual int C_Customers(string accountName, string passWord, Nullable<int> idCusAuthe, string firstName, string lastName, Nullable<bool> sex, string address, string phoneNumber, string email, Nullable<System.DateTime> dateRegistation, Nullable<System.DateTime> dateActivated)
         {
@@ -379,6 +380,71 @@ namespace Laptop_Shop.Models
                 new ObjectParameter("namecate", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<search_Cate_Result1>("search_Cate", namecateParameter);
+        }
+    
+        public virtual int Add_new_Brand(string brandName, string brandDescription, string brandHomePage)
+        {
+            var brandNameParameter = brandName != null ?
+                new ObjectParameter("brandName", brandName) :
+                new ObjectParameter("brandName", typeof(string));
+    
+            var brandDescriptionParameter = brandDescription != null ?
+                new ObjectParameter("brandDescription", brandDescription) :
+                new ObjectParameter("brandDescription", typeof(string));
+    
+            var brandHomePageParameter = brandHomePage != null ?
+                new ObjectParameter("brandHomePage", brandHomePage) :
+                new ObjectParameter("brandHomePage", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Add_new_Brand", brandNameParameter, brandDescriptionParameter, brandHomePageParameter);
+        }
+    
+        public virtual int del_Brands(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("del_Brands", idParameter);
+        }
+    
+        public virtual int edit_Brands(Nullable<int> id, string brandName, string brandDescription, string brandHomePage)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            var brandNameParameter = brandName != null ?
+                new ObjectParameter("brandName", brandName) :
+                new ObjectParameter("brandName", typeof(string));
+    
+            var brandDescriptionParameter = brandDescription != null ?
+                new ObjectParameter("brandDescription", brandDescription) :
+                new ObjectParameter("brandDescription", typeof(string));
+    
+            var brandHomePageParameter = brandHomePage != null ?
+                new ObjectParameter("brandHomePage", brandHomePage) :
+                new ObjectParameter("brandHomePage", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("edit_Brands", idParameter, brandNameParameter, brandDescriptionParameter, brandHomePageParameter);
+        }
+    
+        public virtual ObjectResult<get_a_Brands_Result> get_a_Brands(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<get_a_Brands_Result>("get_a_Brands", idParameter);
+        }
+    
+        public virtual ObjectResult<search_Brand_Result> search_Brand(string brandName)
+        {
+            var brandNameParameter = brandName != null ?
+                new ObjectParameter("brandName", brandName) :
+                new ObjectParameter("brandName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<search_Brand_Result>("search_Brand", brandNameParameter);
         }
     }
 }
