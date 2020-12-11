@@ -125,7 +125,7 @@ warning 6002: The table/view 'DBLaptop.dbo.view_list_Category' does not have a p
     <Property Name="cateName" Type="nvarchar" MaxLength="50" />
     <Property Name="cateDescription" Type="nvarchar" MaxLength="50" />
   </EntityType>
-  <Association Name="FK__Cart__id_product__49C3F6B7">
+  <Association Name="FK__Cart__id_product__37A5467C">
     <End Role="Products" Type="Self.Products" Multiplicity="1" />
     <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
     <ReferentialConstraint>
@@ -137,7 +137,7 @@ warning 6002: The table/view 'DBLaptop.dbo.view_list_Category' does not have a p
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Cart__id_user__4AB81AF0">
+  <Association Name="FK__Cart__id_user__38996AB5">
     <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
     <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
     <ReferentialConstraint>
@@ -263,7 +263,7 @@ warning 6002: The table/view 'DBLaptop.dbo.view_list_Category' does not have a p
     <Parameter Name="dateActivated" Type="date" Mode="In" />
   </Function>
   <Function Name="del_cate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="idcate" Type="int" Mode="In" />
+    <Parameter Name="id" Type="int" Mode="In" />
   </Function>
   <Function Name="Delete_Customer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="idUser" Type="int" Mode="In" />
@@ -298,7 +298,7 @@ warning 6002: The table/view 'DBLaptop.dbo.view_list_Category' does not have a p
   <Function Name="get_a_cate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="id" Type="int" Mode="In" />
   </Function>
-  <Function Name="search_cate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+  <Function Name="search_Cate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="namecate" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -367,11 +367,11 @@ warning 6002: The table/view 'DBLaptop.dbo.view_list_Category' does not have a p
     [view_list_Category].[cateDescription] AS [cateDescription]
     FROM [dbo].[view_list_Category] AS [view_list_Category]</DefiningQuery>
     </EntitySet>
-    <AssociationSet Name="FK__Cart__id_product__49C3F6B7" Association="Self.FK__Cart__id_product__49C3F6B7">
+    <AssociationSet Name="FK__Cart__id_product__37A5467C" Association="Self.FK__Cart__id_product__37A5467C">
       <End Role="Products" EntitySet="Products" />
       <End Role="Cart" EntitySet="Cart" />
     </AssociationSet>
-    <AssociationSet Name="FK__Cart__id_user__4AB81AF0" Association="Self.FK__Cart__id_user__4AB81AF0">
+    <AssociationSet Name="FK__Cart__id_user__38996AB5" Association="Self.FK__Cart__id_user__38996AB5">
       <End Role="Customers" EntitySet="Customers" />
       <End Role="Cart" EntitySet="Cart" />
     </AssociationSet>

@@ -383,7 +383,7 @@
     </FunctionImport>
     <FunctionImport Name="sp_upgraddiagrams1" />
     <FunctionImport Name="del_cate">
-      <Parameter Name="idcate" Mode="In" Type="Int32" />
+      <Parameter Name="id" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="edit_cate">
       <Parameter Name="id" Mode="In" Type="Int32" />
@@ -393,7 +393,7 @@
     <FunctionImport Name="get_a_cate" ReturnType="Collection(DBLaptopModel.get_a_cate_Result)">
       <Parameter Name="id" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="search_cate" ReturnType="Collection(DBLaptopModel.search_cate_Result)">
+    <FunctionImport Name="search_Cate" ReturnType="Collection(DBLaptopModel.search_Cate_Result1)">
       <Parameter Name="namecate" Mode="In" Type="String" />
     </FunctionImport>
   </EntityContainer>
@@ -452,6 +452,11 @@
     <Property Type="String" Name="cateDescription" Nullable="true" MaxLength="50" />
   </ComplexType>
   <ComplexType Name="search_cate_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="cateName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="cateDescription" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="search_Cate_Result1">
     <Property Type="Int32" Name="ID" Nullable="false" />
     <Property Type="String" Name="cateName" Nullable="true" MaxLength="50" />
     <Property Type="String" Name="cateDescription" Nullable="true" MaxLength="50" />

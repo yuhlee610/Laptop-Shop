@@ -87,7 +87,7 @@ namespace Laptop_Shop.ModelController
         {
             using (var _context = new DBLaptopEntities())
             {
-                var dbsearch = _context.search_cate(name);
+                var dbsearch = _context.search_Cate(name);
                 List<Category> categories = new List<Category>();
                 foreach (var item in dbsearch)
                 {

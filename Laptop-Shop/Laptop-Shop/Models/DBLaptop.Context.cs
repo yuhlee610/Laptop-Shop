@@ -337,13 +337,13 @@ namespace Laptop_Shop.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams1");
         }
     
-        public virtual int del_cate(Nullable<int> idcate)
+        public virtual int del_cate(Nullable<int> id)
         {
-            var idcateParameter = idcate.HasValue ?
-                new ObjectParameter("idcate", idcate) :
-                new ObjectParameter("idcate", typeof(int));
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("del_cate", idcateParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("del_cate", idParameter);
         }
     
         public virtual int edit_cate(Nullable<int> id, string nameCate, string desCate)
@@ -372,13 +372,13 @@ namespace Laptop_Shop.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<get_a_cate_Result>("get_a_cate", idParameter);
         }
     
-        public virtual ObjectResult<search_cate_Result> search_cate(string namecate)
+        public virtual ObjectResult<search_Cate_Result1> search_Cate(string namecate)
         {
             var namecateParameter = namecate != null ?
                 new ObjectParameter("namecate", namecate) :
                 new ObjectParameter("namecate", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<search_cate_Result>("search_cate", namecateParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<search_Cate_Result1>("search_Cate", namecateParameter);
         }
     }
 }

@@ -172,9 +172,9 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="search_cate" FunctionName="DBLaptopModel.Store.search_cate">
+    <FunctionImportMapping FunctionImportName="search_Cate" FunctionName="DBLaptopModel.Store.search_Cate">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="DBLaptopModel.search_cate_Result">
+        <ComplexTypeMapping TypeName="DBLaptopModel.search_Cate_Result1">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="cateName" ColumnName="cateName" />
           <ScalarProperty Name="cateDescription" ColumnName="cateDescription" />

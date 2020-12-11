@@ -199,6 +199,9 @@
     <Compile Include="Models\search_cate_Result.cs">
       <DependentUpon>DBLaptop.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\search_Cate_Result1.cs">
+      <DependentUpon>DBLaptop.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
       <DependentUpon>DBLaptop.tt</DependentUpon>
     </Compile>

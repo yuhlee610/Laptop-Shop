@@ -130,7 +130,7 @@ warning 6002: The table/view 'DBLaptop.dbo.view_list_Category' does not have a p
           <Property Name="cateName" Type="nvarchar" MaxLength="50" />
           <Property Name="cateDescription" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <Association Name="FK__Cart__id_product__49C3F6B7">
+        <Association Name="FK__Cart__id_product__37A5467C">
           <End Role="Products" Type="Self.Products" Multiplicity="1" />
           <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
           <ReferentialConstraint>
@@ -142,7 +142,7 @@ warning 6002: The table/view 'DBLaptop.dbo.view_list_Category' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Cart__id_user__4AB81AF0">
+        <Association Name="FK__Cart__id_user__38996AB5">
           <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
           <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
           <ReferentialConstraint>
@@ -268,7 +268,7 @@ warning 6002: The table/view 'DBLaptop.dbo.view_list_Category' does not have a p
           <Parameter Name="dateActivated" Type="date" Mode="In" />
         </Function>
         <Function Name="del_cate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="idcate" Type="int" Mode="In" />
+          <Parameter Name="id" Type="int" Mode="In" />
         </Function>
         <Function Name="Delete_Customer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idUser" Type="int" Mode="In" />
@@ -303,7 +303,7 @@ warning 6002: The table/view 'DBLaptop.dbo.view_list_Category' does not have a p
         <Function Name="get_a_cate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
         </Function>
-        <Function Name="search_cate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+        <Function Name="search_Cate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="namecate" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -372,11 +372,11 @@ warning 6002: The table/view 'DBLaptop.dbo.view_list_Category' does not have a p
     [view_list_Category].[cateDescription] AS [cateDescription]
     FROM [dbo].[view_list_Category] AS [view_list_Category]</DefiningQuery>
           </EntitySet>
-          <AssociationSet Name="FK__Cart__id_product__49C3F6B7" Association="Self.FK__Cart__id_product__49C3F6B7">
+          <AssociationSet Name="FK__Cart__id_product__37A5467C" Association="Self.FK__Cart__id_product__37A5467C">
             <End Role="Products" EntitySet="Products" />
             <End Role="Cart" EntitySet="Cart" />
           </AssociationSet>
-          <AssociationSet Name="FK__Cart__id_user__4AB81AF0" Association="Self.FK__Cart__id_user__4AB81AF0">
+          <AssociationSet Name="FK__Cart__id_user__38996AB5" Association="Self.FK__Cart__id_user__38996AB5">
             <End Role="Customers" EntitySet="Customers" />
             <End Role="Cart" EntitySet="Cart" />
           </AssociationSet>
@@ -800,7 +800,7 @@ warning 6002: The table/view 'DBLaptop.dbo.view_list_Category' does not have a p
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams1" />
           <FunctionImport Name="del_cate">
-          <Parameter Name="idcate" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="edit_cate">
             <Parameter Name="id" Mode="In" Type="Int32" />
@@ -810,7 +810,7 @@ warning 6002: The table/view 'DBLaptop.dbo.view_list_Category' does not have a p
           <FunctionImport Name="get_a_cate" ReturnType="Collection(DBLaptopModel.get_a_cate_Result)">
           <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="search_cate" ReturnType="Collection(DBLaptopModel.search_cate_Result)">
+          <FunctionImport Name="search_Cate" ReturnType="Collection(DBLaptopModel.search_Cate_Result1)">
             <Parameter Name="namecate" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
@@ -869,6 +869,11 @@ warning 6002: The table/view 'DBLaptop.dbo.view_list_Category' does not have a p
           <Property Type="String" Name="cateDescription" Nullable="true" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="search_cate_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="cateName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="cateDescription" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="search_Cate_Result1">
           <Property Type="Int32" Name="ID" Nullable="false" />
           <Property Type="String" Name="cateName" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="cateDescription" Nullable="true" MaxLength="50" />
@@ -1051,9 +1056,9 @@ warning 6002: The table/view 'DBLaptop.dbo.view_list_Category' does not have a p
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="search_cate" FunctionName="DBLaptopModel.Store.search_cate">
+          <FunctionImportMapping FunctionImportName="search_Cate" FunctionName="DBLaptopModel.Store.search_Cate">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="DBLaptopModel.search_cate_Result">
+              <ComplexTypeMapping TypeName="DBLaptopModel.search_Cate_Result1">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="cateName" ColumnName="cateName" />
                 <ScalarProperty Name="cateDescription" ColumnName="cateDescription" />
