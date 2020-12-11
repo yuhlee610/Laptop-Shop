@@ -69,5 +69,39 @@ BEGIN
     SET @bitRetVal = 1   -- Valid
   RETURN @bitRetVal
 END 
+--trigger them vao gio hang
+CREATE trigger Trg_Cart on Cart after insert, update as
+BEGIN TRANSACTION;
+	UPDATE Products
+	SET viewCount = viewCount - (
+		SELECT count
+		FROM inserted
+		WHERE id_product = Products.ID
+	)
+	FROM Products
+	JOIN inserted ON Products.ID = inserted.id_product
+COMMIT TRANSACTION;
 
-select dbo.vaValidEmail('nghia@gmail.com')
+--trigger hủy bỏ sản phẩm trong giỏ hàng
+CREATE trigger Trg_DelCart on Cart for delete as
+BEGIN TRANSACTION;
+	UPDATE Products
+	SET viewCount = viewCount + (
+		SELECT count
+		FROM deleted
+		WHERE id_product = Products.ID
+	)
+	FROM Products
+	JOIN deleted ON Products.ID = deleted.id_product
+COMMIT TRANSACTION;
+
+--tự động thêm ngày tháng trong bảng Orders
+CREATE TRIGGER Trg_InsertOrder on Orders 
+after insert,update
+as
+begin transaction;
+	update Orders
+	set createDate=GETDATE(), requireDate=DATEADD(DAY,3,GETDATE())
+	from Orders inner join inserted
+	on Orders.ID=inserted.ID
+commit transaction;
