@@ -25,6 +25,8 @@
         <AssociationConnector Association="DBLaptopModel.FK_Orders_User" ManuallyRouted="false" />
         <AssociationConnector Association="DBLaptopModel.FK_OrderDetails_Orders" ManuallyRouted="false" />
         <AssociationConnector Association="DBLaptopModel.FK_OrderDetails_Products" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DBLaptopModel.sysdiagram" Width="1.5" PointX="5.375" PointY="6.75" />
+        <EntityTypeShape EntityType="DBLaptopModel.view_list_Category" Width="1.5" PointX="7.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

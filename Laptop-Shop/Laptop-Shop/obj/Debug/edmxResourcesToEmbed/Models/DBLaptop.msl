@@ -117,5 +117,69 @@
     <FunctionImportMapping FunctionImportName="Delete_Customer" FunctionName="DBLaptopModel.Store.Delete_Customer" />
     <FunctionImportMapping FunctionImportName="F_getCustomerByID" FunctionName="DBLaptopModel.Store.F_getCustomerByID" />
     <FunctionImportMapping FunctionImportName="Update_Customers" FunctionName="DBLaptopModel.Store.Update_Customers" />
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="DBLaptopModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="definition" ColumnName="definition" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="view_list_Category">
+      <EntityTypeMapping TypeName="DBLaptopModel.view_list_Category">
+        <MappingFragment StoreEntitySet="view_list_Category">
+          <ScalarProperty Name="cateDescription" ColumnName="cateDescription" />
+          <ScalarProperty Name="cateName" ColumnName="cateName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="Add_new_Cate" FunctionName="DBLaptopModel.Store.Add_new_Cate" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="DBLaptopModel.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="DBLaptopModel.Store.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBLaptopModel.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="DBLaptopModel.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram1" FunctionName="DBLaptopModel.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram1" FunctionName="DBLaptopModel.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams1" FunctionName="DBLaptopModel.Store.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBLaptopModel.sp_helpdiagrams1_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams1" FunctionName="DBLaptopModel.Store.sp_upgraddiagrams" />
+    <FunctionImportMapping FunctionImportName="del_cate" FunctionName="DBLaptopModel.Store.del_cate" />
+    <FunctionImportMapping FunctionImportName="edit_cate" FunctionName="DBLaptopModel.Store.edit_cate" />
+    <FunctionImportMapping FunctionImportName="get_a_cate" FunctionName="DBLaptopModel.Store.get_a_cate">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBLaptopModel.get_a_cate_Result">
+          <ScalarProperty Name="cateName" ColumnName="cateName" />
+          <ScalarProperty Name="cateDescription" ColumnName="cateDescription" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="search_cate" FunctionName="DBLaptopModel.Store.search_cate">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBLaptopModel.search_cate_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="cateName" ColumnName="cateName" />
+          <ScalarProperty Name="cateDescription" ColumnName="cateDescription" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>
