@@ -417,6 +417,32 @@
     <FunctionImport Name="search_Brand" ReturnType="Collection(DBLaptopModel.search_Brand_Result)">
       <Parameter Name="brandName" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="get_a_Product" EntitySet="Products" ReturnType="Collection(DBLaptopModel.Product)">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="add_Cart">
+      <Parameter Name="id_user" Mode="In" Type="Int32" />
+      <Parameter Name="id_pro" Mode="In" Type="Int32" />
+      <Parameter Name="count" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="F_getBrandByID" IsComposable="true" EntitySet="Brands" ReturnType="Collection(DBLaptopModel.Brand)">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="F_getCategoryByID" IsComposable="true" EntitySet="Categories" ReturnType="Collection(DBLaptopModel.Category)">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="getCart" IsComposable="true" ReturnType="Collection(DBLaptopModel.getCart_Result)">
+      <Parameter Name="id_user" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="del_Cart">
+      <Parameter Name="id_user" Mode="In" Type="Int32" />
+      <Parameter Name="id_pro" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Charge">
+      <Parameter Name="id_user" Mode="In" Type="Int32" />
+      <Parameter Name="id_pro" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="getListCart" IsComposable="true" EntitySet="Carts" ReturnType="Collection(DBLaptopModel.Cart)" />
   </EntityContainer>
   <ComplexType Name="F_getCustomerByID_Result">
     <Property Type="Int32" Name="idUser" Nullable="false" />
@@ -500,5 +526,42 @@
     <Property Type="String" Name="brandName" Nullable="true" MaxLength="50" />
     <Property Type="String" Name="brandDescription" Nullable="true" MaxLength="Max" />
     <Property Type="String" Name="brandHomePage" Nullable="true" MaxLength="250" />
+  </ComplexType>
+  <ComplexType Name="get_a_Product_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="productName" Nullable="false" MaxLength="250" />
+    <Property Type="String" Name="productDescription" Nullable="true" MaxLength="Max" />
+    <Property Type="Decimal" Name="Price" Nullable="true" Precision="18" Scale="0" />
+    <Property Type="Decimal" Name="promotionPrice" Nullable="true" Precision="18" Scale="0" />
+    <Property Type="String" Name="productPicture" Nullable="true" MaxLength="150" />
+    <Property Type="Int32" Name="categoryID" Nullable="true" />
+    <Property Type="DateTime" Name="createDate" Nullable="true" />
+    <Property Type="Int32" Name="viewCount" Nullable="true" />
+    <Property Type="Boolean" Name="productStatus" Nullable="true" />
+    <Property Type="Int32" Name="BrandID" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="F_getBrandByID_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="brandName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="brandDescription" Nullable="true" MaxLength="Max" />
+    <Property Type="String" Name="brandHomePage" Nullable="true" MaxLength="250" />
+  </ComplexType>
+  <ComplexType Name="F_getCategoryByID_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="cateName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="cateDescription" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="getCart_Result">
+    <Property Type="Decimal" Name="Price" Nullable="true" Precision="18" Scale="0" />
+    <Property Type="Decimal" Name="promotionPrice" Nullable="true" Precision="18" Scale="0" />
+    <Property Type="String" Name="productName" Nullable="false" MaxLength="250" />
+    <Property Type="String" Name="productPicture" Nullable="true" MaxLength="150" />
+    <Property Type="Int32" Name="count" Nullable="true" />
+    <Property Type="Int32" Name="id_product" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="getListCart_Result">
+    <Property Type="Int32" Name="id_product" Nullable="false" />
+    <Property Type="Int32" Name="id_user" Nullable="false" />
+    <Property Type="Int32" Name="count" Nullable="true" />
   </ComplexType>
 </Schema>

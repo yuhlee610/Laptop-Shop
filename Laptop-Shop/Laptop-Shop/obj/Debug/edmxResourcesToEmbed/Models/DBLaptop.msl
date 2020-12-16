@@ -212,5 +212,24 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="get_a_Product" FunctionName="DBLaptopModel.Store.get_a_Product" />
+    <FunctionImportMapping FunctionImportName="add_Cart" FunctionName="DBLaptopModel.Store.add_Cart" />
+    <FunctionImportMapping FunctionImportName="F_getBrandByID" FunctionName="DBLaptopModel.Store.F_getBrandByID" />
+    <FunctionImportMapping FunctionImportName="F_getCategoryByID" FunctionName="DBLaptopModel.Store.F_getCategoryByID" />
+    <FunctionImportMapping FunctionImportName="getCart" FunctionName="DBLaptopModel.Store.getCart">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBLaptopModel.getCart_Result">
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="promotionPrice" ColumnName="promotionPrice" />
+          <ScalarProperty Name="productName" ColumnName="productName" />
+          <ScalarProperty Name="productPicture" ColumnName="productPicture" />
+          <ScalarProperty Name="count" ColumnName="count" />
+          <ScalarProperty Name="id_product" ColumnName="id_product" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="del_Cart" FunctionName="DBLaptopModel.Store.del_Cart" />
+    <FunctionImportMapping FunctionImportName="Charge" FunctionName="DBLaptopModel.Store.Charge" />
+    <FunctionImportMapping FunctionImportName="getListCart" FunctionName="DBLaptopModel.Store.getListCart" />
   </EntityContainerMapping>
 </Mapping>

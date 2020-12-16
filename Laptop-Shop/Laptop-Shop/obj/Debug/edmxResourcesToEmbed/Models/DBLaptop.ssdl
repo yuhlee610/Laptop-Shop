@@ -256,6 +256,11 @@ warning 6002: The table/view 'DBLaptop.dbo.view_list_Category' does not have a p
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="add_Cart" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id_user" Type="int" Mode="In" />
+    <Parameter Name="id_pro" Type="int" Mode="In" />
+    <Parameter Name="count" Type="int" Mode="In" />
+  </Function>
   <Function Name="Add_new_Brand" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="brandName" Type="nvarchar" Mode="In" />
     <Parameter Name="brandDescription" Type="nvarchar" Mode="In" />
@@ -278,8 +283,16 @@ warning 6002: The table/view 'DBLaptop.dbo.view_list_Category' does not have a p
     <Parameter Name="dateRegistation" Type="date" Mode="In" />
     <Parameter Name="dateActivated" Type="date" Mode="In" />
   </Function>
+  <Function Name="Charge" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id_user" Type="int" Mode="In" />
+    <Parameter Name="id_pro" Type="int" Mode="In" />
+  </Function>
   <Function Name="del_Brands" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="del_Cart" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id_user" Type="int" Mode="In" />
+    <Parameter Name="id_pro" Type="int" Mode="In" />
   </Function>
   <Function Name="del_cate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="id" Type="int" Mode="In" />
@@ -297,6 +310,31 @@ warning 6002: The table/view 'DBLaptop.dbo.view_list_Category' does not have a p
     <Parameter Name="id" Type="int" Mode="In" />
     <Parameter Name="nameCate" Type="nvarchar" Mode="In" />
     <Parameter Name="desCate" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="F_getBrandByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+    <ReturnType>
+      <CollectionType>
+        <RowType>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="brandName" Type="nvarchar" MaxLength="50" />
+          <Property Name="brandDescription" Type="text" />
+          <Property Name="brandHomePage" Type="nvarchar" MaxLength="250" />
+        </RowType>
+      </CollectionType>
+    </ReturnType>
+  </Function>
+  <Function Name="F_getCategoryByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+    <ReturnType>
+      <CollectionType>
+        <RowType>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="cateName" Type="nvarchar" MaxLength="50" />
+          <Property Name="cateDescription" Type="nvarchar" MaxLength="50" />
+        </RowType>
+      </CollectionType>
+    </ReturnType>
   </Function>
   <Function Name="F_getCustomerByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="id" Type="int" Mode="In" />
@@ -325,6 +363,35 @@ warning 6002: The table/view 'DBLaptop.dbo.view_list_Category' does not have a p
   </Function>
   <Function Name="get_a_cate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="get_a_Product" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="getCart" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id_user" Type="int" Mode="In" />
+    <ReturnType>
+      <CollectionType>
+        <RowType>
+          <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="promotionPrice" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="productName" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="productPicture" Type="nvarchar" MaxLength="150" />
+          <Property Name="count" Type="int" />
+          <Property Name="id_product" Type="int" Nullable="false" />
+        </RowType>
+      </CollectionType>
+    </ReturnType>
+  </Function>
+  <Function Name="getListCart" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <ReturnType>
+      <CollectionType>
+        <RowType>
+          <Property Name="id_product" Type="int" Nullable="false" />
+          <Property Name="id_user" Type="int" Nullable="false" />
+          <Property Name="count" Type="int" />
+        </RowType>
+      </CollectionType>
+    </ReturnType>
   </Function>
   <Function Name="search_Brand" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="brandName" Type="nvarchar" Mode="In" />

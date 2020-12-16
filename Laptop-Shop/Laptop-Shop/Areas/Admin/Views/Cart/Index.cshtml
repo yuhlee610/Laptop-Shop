@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Laptop_Shop.Models.Cart>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Customer.accountName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Product.productName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.count)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr id="row_@item.id_user@item.id_product">
+    <td>
+        @Html.DisplayFor(modelItem => item.Customer.accountName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Product.productName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.count)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id_user=item.id_user,id_pro=item.id_product }) |
+        @Ajax.ActionLink("Delete", "Delete", new { @id_user=item.id_user, @id_pro=item.id_product},
+       new AjaxOptions {
+           Confirm = "Bạn có muốn xoá bản ghi này?",
+           OnComplete = "$('#row_" + @item.id_user+@item.id_product + "').remove()",
+           HttpMethod = "Delete"
+       })
+    </td>
+</tr>
+}
+
+</table>

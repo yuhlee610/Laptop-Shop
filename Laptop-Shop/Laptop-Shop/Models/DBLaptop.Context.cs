@@ -446,5 +446,102 @@ namespace Laptop_Shop.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<search_Brand_Result>("search_Brand", brandNameParameter);
         }
+    
+        public virtual ObjectResult<Product> get_a_Product(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Product>("get_a_Product", idParameter);
+        }
+    
+        public virtual ObjectResult<Product> get_a_Product(Nullable<int> id, MergeOption mergeOption)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Product>("get_a_Product", mergeOption, idParameter);
+        }
+    
+        public virtual int add_Cart(Nullable<int> id_user, Nullable<int> id_pro, Nullable<int> count)
+        {
+            var id_userParameter = id_user.HasValue ?
+                new ObjectParameter("id_user", id_user) :
+                new ObjectParameter("id_user", typeof(int));
+    
+            var id_proParameter = id_pro.HasValue ?
+                new ObjectParameter("id_pro", id_pro) :
+                new ObjectParameter("id_pro", typeof(int));
+    
+            var countParameter = count.HasValue ?
+                new ObjectParameter("count", count) :
+                new ObjectParameter("count", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("add_Cart", id_userParameter, id_proParameter, countParameter);
+        }
+    
+        [DbFunction("DBLaptopEntities", "F_getBrandByID")]
+        public virtual IQueryable<Brand> F_getBrandByID(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<Brand>("[DBLaptopEntities].[F_getBrandByID](@id)", idParameter);
+        }
+    
+        [DbFunction("DBLaptopEntities", "F_getCategoryByID")]
+        public virtual IQueryable<Category> F_getCategoryByID(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<Category>("[DBLaptopEntities].[F_getCategoryByID](@id)", idParameter);
+        }
+    
+        [DbFunction("DBLaptopEntities", "getCart")]
+        public virtual IQueryable<getCart_Result> getCart(Nullable<int> id_user)
+        {
+            var id_userParameter = id_user.HasValue ?
+                new ObjectParameter("id_user", id_user) :
+                new ObjectParameter("id_user", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<getCart_Result>("[DBLaptopEntities].[getCart](@id_user)", id_userParameter);
+        }
+    
+        public virtual int del_Cart(Nullable<int> id_user, Nullable<int> id_pro)
+        {
+            var id_userParameter = id_user.HasValue ?
+                new ObjectParameter("id_user", id_user) :
+                new ObjectParameter("id_user", typeof(int));
+    
+            var id_proParameter = id_pro.HasValue ?
+                new ObjectParameter("id_pro", id_pro) :
+                new ObjectParameter("id_pro", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("del_Cart", id_userParameter, id_proParameter);
+        }
+    
+        public virtual int Charge(Nullable<int> id_user, Nullable<int> id_pro)
+        {
+            var id_userParameter = id_user.HasValue ?
+                new ObjectParameter("id_user", id_user) :
+                new ObjectParameter("id_user", typeof(int));
+    
+            var id_proParameter = id_pro.HasValue ?
+                new ObjectParameter("id_pro", id_pro) :
+                new ObjectParameter("id_pro", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Charge", id_userParameter, id_proParameter);
+        }
+    
+        [DbFunction("DBLaptopEntities", "getListCart")]
+        public virtual IQueryable<Cart> getListCart()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<Cart>("[DBLaptopEntities].[getListCart]()");
+        }
     }
 }

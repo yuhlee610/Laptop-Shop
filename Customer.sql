@@ -70,7 +70,7 @@ BEGIN
   RETURN @bitRetVal
 END 
 --trigger them vao gio hang
-CREATE trigger Trg_Cart on Cart after insert, update as
+create trigger Trg_Cart on Cart after insert as
 BEGIN TRANSACTION;
 	UPDATE Products
 	SET viewCount = viewCount - (
@@ -80,6 +80,23 @@ BEGIN TRANSACTION;
 	)
 	FROM Products
 	JOIN inserted ON Products.ID = inserted.id_product
+COMMIT TRANSACTION;
+
+CREATE trigger Trg_UpdateCart on Cart after update as
+BEGIN TRANSACTION;
+	UPDATE Products
+	SET viewCount = viewCount - (
+		SELECT count
+		FROM inserted
+		WHERE id_product = Products.ID
+	) +(
+		SELECT count
+		FROM deleted
+		WHERE id_product = Products.ID
+	)
+	FROM Products
+	JOIN inserted ON Products.ID = inserted.id_product
+	Join deleted on Products.ID = deleted.id_product
 COMMIT TRANSACTION;
 
 --trigger hủy bỏ sản phẩm trong giỏ hàng

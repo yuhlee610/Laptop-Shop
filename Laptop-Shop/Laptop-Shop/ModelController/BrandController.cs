@@ -52,7 +52,7 @@ namespace Laptop_Shop.ModelController
                 return false;
             }
         }
-        public static bool get01cate(int id)
+        public static bool get01brand(int id)
         {
             try
             {
@@ -81,7 +81,6 @@ namespace Laptop_Shop.ModelController
             {
                 return false;
             }
-            return true;
         }
 
         public static List<Brand> SearchBrands(string name)

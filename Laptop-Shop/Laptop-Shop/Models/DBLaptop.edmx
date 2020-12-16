@@ -261,6 +261,11 @@ warning 6002: The table/view 'DBLaptop.dbo.view_list_Category' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="add_Cart" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_user" Type="int" Mode="In" />
+          <Parameter Name="id_pro" Type="int" Mode="In" />
+          <Parameter Name="count" Type="int" Mode="In" />
+        </Function>
         <Function Name="Add_new_Brand" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="brandName" Type="nvarchar" Mode="In" />
           <Parameter Name="brandDescription" Type="nvarchar" Mode="In" />
@@ -283,8 +288,16 @@ warning 6002: The table/view 'DBLaptop.dbo.view_list_Category' does not have a p
           <Parameter Name="dateRegistation" Type="date" Mode="In" />
           <Parameter Name="dateActivated" Type="date" Mode="In" />
         </Function>
+        <Function Name="Charge" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_user" Type="int" Mode="In" />
+          <Parameter Name="id_pro" Type="int" Mode="In" />
+        </Function>
         <Function Name="del_Brands" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="del_Cart" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_user" Type="int" Mode="In" />
+          <Parameter Name="id_pro" Type="int" Mode="In" />
         </Function>
         <Function Name="del_cate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
@@ -302,6 +315,31 @@ warning 6002: The table/view 'DBLaptop.dbo.view_list_Category' does not have a p
           <Parameter Name="id" Type="int" Mode="In" />
           <Parameter Name="nameCate" Type="nvarchar" Mode="In" />
           <Parameter Name="desCate" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="F_getBrandByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="ID" Type="int" Nullable="false" />
+                <Property Name="brandName" Type="nvarchar" MaxLength="50" />
+                <Property Name="brandDescription" Type="text" />
+                <Property Name="brandHomePage" Type="nvarchar" MaxLength="250" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="F_getCategoryByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="ID" Type="int" Nullable="false" />
+                <Property Name="cateName" Type="nvarchar" MaxLength="50" />
+                <Property Name="cateDescription" Type="nvarchar" MaxLength="50" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
         </Function>
         <Function Name="F_getCustomerByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
@@ -330,6 +368,35 @@ warning 6002: The table/view 'DBLaptop.dbo.view_list_Category' does not have a p
         </Function>
         <Function Name="get_a_cate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="get_a_Product" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="getCart" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_user" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
+                <Property Name="promotionPrice" Type="decimal" Precision="18" Scale="0" />
+                <Property Name="productName" Type="nvarchar" MaxLength="250" Nullable="false" />
+                <Property Name="productPicture" Type="nvarchar" MaxLength="150" />
+                <Property Name="count" Type="int" />
+                <Property Name="id_product" Type="int" Nullable="false" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="getListCart" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="id_product" Type="int" Nullable="false" />
+                <Property Name="id_user" Type="int" Nullable="false" />
+                <Property Name="count" Type="int" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
         </Function>
         <Function Name="search_Brand" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="brandName" Type="nvarchar" Mode="In" />
@@ -873,6 +940,32 @@ warning 6002: The table/view 'DBLaptop.dbo.view_list_Category' does not have a p
           <FunctionImport Name="search_Brand" ReturnType="Collection(DBLaptopModel.search_Brand_Result)">
           <Parameter Name="brandName" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="get_a_Product" EntitySet="Products" ReturnType="Collection(DBLaptopModel.Product)">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="add_Cart">
+            <Parameter Name="id_user" Mode="In" Type="Int32" />
+            <Parameter Name="id_pro" Mode="In" Type="Int32" />
+            <Parameter Name="count" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="F_getBrandByID" IsComposable="true" EntitySet="Brands" ReturnType="Collection(DBLaptopModel.Brand)">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="F_getCategoryByID" IsComposable="true" EntitySet="Categories" ReturnType="Collection(DBLaptopModel.Category)">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getCart" IsComposable="true" ReturnType="Collection(DBLaptopModel.getCart_Result)">
+          <Parameter Name="id_user" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="del_Cart">
+            <Parameter Name="id_user" Mode="In" Type="Int32" />
+            <Parameter Name="id_pro" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Charge">
+            <Parameter Name="id_user" Mode="In" Type="Int32" />
+            <Parameter Name="id_pro" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getListCart" IsComposable="true" EntitySet="Carts" ReturnType="Collection(DBLaptopModel.Cart)" />
         </EntityContainer>
         <ComplexType Name="F_getCustomerByID_Result">
           <Property Type="Int32" Name="idUser" Nullable="false" />
@@ -956,6 +1049,43 @@ warning 6002: The table/view 'DBLaptop.dbo.view_list_Category' does not have a p
           <Property Type="String" Name="brandName" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="brandDescription" Nullable="true" MaxLength="Max" />
           <Property Type="String" Name="brandHomePage" Nullable="true" MaxLength="250" />
+        </ComplexType>
+        <ComplexType Name="get_a_Product_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="productName" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="productDescription" Nullable="true" MaxLength="Max" />
+          <Property Type="Decimal" Name="Price" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="promotionPrice" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="productPicture" Nullable="true" MaxLength="150" />
+          <Property Type="Int32" Name="categoryID" Nullable="true" />
+          <Property Type="DateTime" Name="createDate" Nullable="true" />
+          <Property Type="Int32" Name="viewCount" Nullable="true" />
+          <Property Type="Boolean" Name="productStatus" Nullable="true" />
+          <Property Type="Int32" Name="BrandID" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="F_getBrandByID_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="brandName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="brandDescription" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="brandHomePage" Nullable="true" MaxLength="250" />
+        </ComplexType>
+        <ComplexType Name="F_getCategoryByID_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="cateName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="cateDescription" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="getCart_Result">
+          <Property Type="Decimal" Name="Price" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="promotionPrice" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="productName" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="productPicture" Nullable="true" MaxLength="150" />
+          <Property Type="Int32" Name="count" Nullable="true" />
+          <Property Type="Int32" Name="id_product" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="getListCart_Result">
+          <Property Type="Int32" Name="id_product" Nullable="false" />
+          <Property Type="Int32" Name="id_user" Nullable="false" />
+          <Property Type="Int32" Name="count" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1174,6 +1304,29 @@ warning 6002: The table/view 'DBLaptop.dbo.view_list_Category' does not have a p
                 <ScalarProperty Name="brandHomePage" ColumnName="brandHomePage" />
               </ComplexTypeMapping>
             </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="get_a_Product" FunctionName="DBLaptopModel.Store.get_a_Product">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="add_Cart" FunctionName="DBLaptopModel.Store.add_Cart" />
+          <FunctionImportMapping FunctionImportName="F_getBrandByID" FunctionName="DBLaptopModel.Store.F_getBrandByID">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="F_getCategoryByID" FunctionName="DBLaptopModel.Store.F_getCategoryByID">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getCart" FunctionName="DBLaptopModel.Store.getCart">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBLaptopModel.getCart_Result">
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="promotionPrice" ColumnName="promotionPrice" />
+                <ScalarProperty Name="productName" ColumnName="productName" />
+                <ScalarProperty Name="productPicture" ColumnName="productPicture" />
+                <ScalarProperty Name="count" ColumnName="count" />
+                <ScalarProperty Name="id_product" ColumnName="id_product" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="del_Cart" FunctionName="DBLaptopModel.Store.del_Cart" />
+          <FunctionImportMapping FunctionImportName="Charge" FunctionName="DBLaptopModel.Store.Charge" />
+          <FunctionImportMapping FunctionImportName="getListCart" FunctionName="DBLaptopModel.Store.getListCart">
           </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>

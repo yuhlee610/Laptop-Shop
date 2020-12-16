@@ -33,7 +33,7 @@ namespace Laptop_Shop.Areas.Admin.Controllers
             ViewBag.idCusAuthe = new SelectList(db.cusAuthes, "id", "nameAuthe");
             if (CustomerController.ValidEmail(cus.Email)==false)
             {
-                SetAlert("Email không hợp lệ", "fail");
+                SetAlert("Email không hợp lệ", "waring");
                 return View("Create");
             }
             if (CustomerController.CreateCustomer(cus))
@@ -43,7 +43,7 @@ namespace Laptop_Shop.Areas.Admin.Controllers
             }
             else
             {
-                SetAlert("Thêm User thất bại", "fail");
+                SetAlert("Thêm User thất bại", "error");
                 return RedirectToAction("Index");
             }
         }
