@@ -15,12 +15,20 @@ namespace Laptop_Shop.Areas.Admin.Controllers
         // GET: Admin/Cart
         public ActionResult Index()
         {
+            //if (Session["admin"] == null)
+            //{
+            //    return RedirectToAction("Login");
+            //}
             List<Cart> crt = db.getListCart().ToList<Cart>();
             return View(crt);
         }
         [HttpGet]
         public ActionResult Create()
         {
+            //if (Session["admin"] == null)
+            //{
+            //    return RedirectToAction("Login");
+            //}
             ViewBag.id_product = new SelectList(db.Products, "ID", "productName");
             ViewBag.id_user = new SelectList(db.Customers, "idUser", "accountName");
             return View();
@@ -30,6 +38,10 @@ namespace Laptop_Shop.Areas.Admin.Controllers
         {
             try
             {
+                //if (Session["admin"] == null)
+                //{
+                //    return RedirectToAction("Login");
+                //}
                 db.add_Cart(crt.id_user, crt.id_product, crt.count);
                 SetAlert("Thêm thành công", "success");
                 return RedirectToAction("Index");
@@ -43,6 +55,10 @@ namespace Laptop_Shop.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Edit(int id_user, int id_pro)
         {
+            //if (Session["admin"] == null)
+            //{
+            //    return RedirectToAction("Login");
+            //}
             ViewBag.id_product = new SelectList(db.Products, "ID", "productName");
             ViewBag.id_user = new SelectList(db.Customers, "idUser", "accountName");
             Cart crt = db.Carts.Where(x => x.id_product == id_pro && x.id_user == id_user).FirstOrDefault();
@@ -53,7 +69,11 @@ namespace Laptop_Shop.Areas.Admin.Controllers
         {
             try
             {
-                if(crt.count > db.Products.Where(x => x.ID==crt.id_product).FirstOrDefault().viewCount || crt.count<0)
+                //if (Session["admin"] == null)
+                //{
+                //    return RedirectToAction("Login");
+                //}
+                if (crt.count > db.Products.Where(x => x.ID==crt.id_product).FirstOrDefault().viewCount || crt.count<0)
                 {
                     SetAlert("Sửa thất bại", "fail");
                     return RedirectToAction("Index");
@@ -76,6 +96,10 @@ namespace Laptop_Shop.Areas.Admin.Controllers
         {
             try 
             {
+                //if (Session["admin"] == null)
+                //{
+                //    return RedirectToAction("Login");
+                //}
                 db.del_Cart(id_user, id_pro);
                 SetAlert("Xóa thành công", "success");
                 return RedirectToAction("Index");

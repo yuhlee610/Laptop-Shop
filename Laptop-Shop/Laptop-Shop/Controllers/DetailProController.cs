@@ -14,6 +14,7 @@ namespace Laptop_Shop.Controllers
     {
         // GET: DetailPro
         private DBLaptopEntities db = new DBLaptopEntities();
+        //xem chi tiết sản phẩm
         public ActionResult Index(int id)
         {
             Product pro = DetailPro.GetProduct(id);
@@ -23,12 +24,14 @@ namespace Laptop_Shop.Controllers
             ViewBag.brand = br;
             return View(pro);
         }
+        //thêm vào giỏ hàng
         public ActionResult AddtoCart(int id_pro, int count)
         {
             Customer cus = Session["customer"] as Customer;
             db.add_Cart(3, id_pro, count);
             return Content("success");
         }
+        //Hiển thị sản phẩm trong giỏ hàng
         public ActionResult Cart()
         {
             Customer cus = Session["customer"] as Customer;
